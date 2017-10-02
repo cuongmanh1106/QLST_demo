@@ -1,0 +1,1 @@
+<%@include file = "include/layout_product.jsp" %>

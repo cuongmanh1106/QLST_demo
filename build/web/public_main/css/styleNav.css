@@ -1,0 +1,127 @@
+
+@font-face {
+    font-family: "Comfortaa Regular";
+    src: url('../fonts/Comfortaa-Regular.ttf');
+}
+
+
+span.dropBottom,
+span.dropRight {
+  display: block;
+  box-shadow: inset 2px 0px 0px #333;
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+}
+
+span.dropBottom {
+  box-shadow: inset 0px 2px 0px #333;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+}
+
+/* h1 {
+  color: #EDEDED;
+  text-align: center;
+  font-family: 'Comfortaa Regular', sans-serif;
+} */
+
+nav {
+  display:table;
+  margin: 20px 0;
+  box-shadow: 0px 2px 2px #023333;
+  /* box-shadow: 5px 5px 0 rgba(0,0,0,.15); */
+  width:1170px;
+  background-color: #009344;
+  border-radius: 5px;
+  
+}
+
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  
+}
+
+nav ul ul {
+  opacity: 0;
+  display:block;
+  position: absolute;
+  top: 160%;
+  visibility: hidden;
+  transition: all .4s ease;
+  -webkit-transition: all .4s ease;
+ 
+}
+
+nav ul ul ul {
+  top: 0%;
+  left: 160%;
+}
+
+nav ul ul li:hover > ul {
+  top: 0%;
+  left: 100%;
+  opacity: 1;
+  visibility: visible;
+}
+
+nav ul li:hover > ul {
+  opacity: 1;
+  top: 100%;
+  left:0;
+  visibility: visible;
+}
+
+
+
+nav ul li {
+  float: left;
+  position: relative;
+  z-index:100;
+}
+
+nav ul ul li { float: none; background-color: #fff; }
+nav ul ul li a{ color: #333; font-size:14px; text-align: left;}
+nav ul li {
+  background-color: #009344;
+  cursor: pointer;
+  padding: 15px 20px;
+}
+
+nav ul a {
+  text-decoration: none;
+  display: block;
+  color: #fff;
+  font-family: 'Comfortaa Regular';
+  width: 6em;
+  text-align: center;
+  text-shadow: 0px -1px 0px rgba(0,0,0,.2);
+  font-size: 16px;
+}
+
+nav ul li:hover {  }
+
+nav ul li a:hover { text-decoration: none; color:#fff; }
+
+nav ul ul a:hover {color: #009344;}
+
+.blog li{
+
+}
+
+.catalog li a{
+ 
+}
+
+
+@media only screen and (min-width: 100px) and (max-width: 479px){
+  
+}

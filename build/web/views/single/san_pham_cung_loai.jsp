@@ -11,10 +11,10 @@
               
             <%for (m_san_pham l:loai_sp){%>
 	      <ul class="product">
-                  <li class="product_img"><img src="public/images/Fruit/<%= l.getHinh()%>" class="img-responsive" alt=""/></li>
+                  <li class="product_img"><img src="public/images/<%= l.getHinh()%>" class="img-responsive" alt=""/></li>
 	      	<li class="product_desc">
 	      		<h4><a href="#"><%= l.getTen_san_pham()%></a></h4>
-	      		<p class="single_price"><%= l.getDon_gia()%></p>
+	      		<p class="single_price">$<%= l.getDon_gia()%></p>
                         <a href="chi_tiet_san_pham?ma_san_pham=<%= l.getMa_san_pham()%>" class="link-cart">Shop now</a>
 	      	    
 	        </li>

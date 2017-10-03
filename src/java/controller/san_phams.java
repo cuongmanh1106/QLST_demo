@@ -110,8 +110,8 @@ public class san_phams extends HttpServlet {
             {
                 
                     
-                case "quan_ao":
-                    list = sq.Doc_san_pham_quan_ao();
+                case "fruit":
+                    list = sq.Doc_san_pham_fruit();
                     count = list.size();
                     
                     if(count<=6)
@@ -125,12 +125,12 @@ public class san_phams extends HttpServlet {
                         limit = 6;
                     }
                     
-                    list = sq.Doc_san_pham_quan_ao_pt(vt, limit);
+                    list = sq.Doc_san_pham_fruit_pt(vt, limit);
                     
                     break;
                     
-                case "thuc_pham_tuoi_song":
-                    list = sq.Doc_san_pham_thuc_pham_tuoi_song();
+                case "vegetable":
+                    list = sq.Doc_san_pham_vegetable();
                     count = list.size();
                     
                     if(count<=6)
@@ -144,12 +144,12 @@ public class san_phams extends HttpServlet {
                         limit = 6;
                     }
                     
-                    list = sq.Doc_san_pham_thuc_pham_tuoi_song_pt(vt, limit);
+                    list = sq.Doc_san_pham_vegetable_pt(vt, limit);
                     
                     break;
                     
-                case "thuc_an_nhanh":
-                    list = sq.Doc_san_pham_thuc_an_nhanh();
+                case "ingredient":
+                    list = sq.Doc_san_pham_ingredient();
                     count = list.size();
                     
                     if(count<=6)
@@ -163,12 +163,12 @@ public class san_phams extends HttpServlet {
                         limit = 6;
                     }
                     
-                    list = sq.Doc_san_pham_thuc_pham_thuc_an_nhanh_pt(vt, limit);
+                    list = sq.Doc_san_pham_ingredient_pt(vt, limit);
                     
                     break;
                             
-                case "ao_nam":
-                    list = sq.Doc_san_pham_ao_nam();
+                case "snack":
+                    list = sq.Doc_san_pham_snack();
                     count = list.size();
                     
                     if(count<=6)
@@ -182,12 +182,12 @@ public class san_phams extends HttpServlet {
                         limit = 6;
                     }
                     
-                    list = sq.Doc_san_pham_ao_nam_pt(vt, limit);
+                    list = sq.Doc_san_pham_snack_pt(vt, limit);
                     
                     break;
                     
-                case "quan_nam":
-                    list = sq.Doc_san_pham_quan_nam();
+                case "drink":
+                    list = sq.Doc_san_pham_drink();
                     count = list.size();
                     
                     if(count<=6)
@@ -201,12 +201,12 @@ public class san_phams extends HttpServlet {
                         limit = 6;
                     }
                     
-                    list = sq.Doc_san_pham_quan_nam_pt(vt, limit);
+                    list = sq.Doc_san_pham_drink_pt(vt, limit);
                     
                     break;
                     
-                case "ao_nu":
-                    list = sq.Doc_san_pham_ao_nu();
+                case "seafood":
+                    list = sq.Doc_san_pham_seafood();
                     count = list.size();
                     
                     if(count<=6)
@@ -220,66 +220,10 @@ public class san_phams extends HttpServlet {
                         limit = 6;
                     }
                     
-                    list = sq.Doc_san_pham_ao_nu_pt(vt, limit);
+                    list = sq.Doc_san_pham_seafood_pt(vt, limit);
                     
                     break;
                     
-                case "quan_nu":
-                    list = sq.Doc_san_pham_quan_nu();
-                    count = list.size();
-                    
-                    if(count<=6)
-                    {
-                        vt = 1;
-                        limit = count;
-                    }
-                    else
-                    {
-                        vt = (pages - 1) *6;
-                        limit =6;
-                    }
-                    
-                    list = sq.Doc_san_pham_quan_nu_pt(vt, limit);
-                    
-                    break;
-                    
-                case "rau_cu":
-                    list = sq.Doc_san_pham_rau_cu();
-                    count = list.size();
-                    
-                    if(count<=6)
-                    {
-                        vt = 1;
-                        limit = count;
-                    }
-                    else
-                    {
-                        vt = (pages - 1) *6;
-                        limit =6;
-                    }
-                    
-                    list = sq.Doc_san_pham_rau_cu_pt(vt, limit);
-                    
-                    break;
-                    
-                case "trai_cay":
-                    list = sq.Doc_san_pham_trai_cay();
-                    count = list.size();
-                    
-                    if(count<=6)
-                    {
-                        vt = 1;
-                        limit = count;
-                    }
-                    else
-                    {
-                        vt = (pages - 1) *6;
-                        limit =6;
-                    }
-                    
-                    list = sq.Doc_san_pham_trai_cay_pt(vt, limit);
-                    
-                    break;
                     
                 case "thit":
                     list = sq.Doc_san_pham_thit();

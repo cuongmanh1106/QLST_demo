@@ -7,12 +7,12 @@
 			<ul class="catalog">
 				<li><a href="#">Fruits & Vegetables</a><span class="dropRight"></span>
 					<ul>
-						<li><a href="san_phams?command=quan_nu">Photoshop</a></li>
-						<li><a href="#">Illustrator</a></li>
+						<li><a href="san_phams?command=snack">Photoshop</a></li>
+						<li><a href="san_phams?command=drink">Illustrator</a></li>
 						<li><a href="#">Web Design</a><span class="dropRight"></span>
 							<ul>
-								<li><a href="#">Bakery</a></li>
-								<li><a href="#">Meat & Poultry</a></li>
+								<li><a href="san_phams?command=seafood">Bakery</a></li>
+								<li><a href="san_phams?command=ingredient">Meat & Poultry</a></li>
 								<li><a href="#">Comestic</a></li>
 							</ul>
 						</li>

@@ -22,7 +22,7 @@
 							<p class="product-name">
 								<a href="#"><%= s.getTen_san_pham()%></a>
 							</p>
-							<a class="img-change" href="public/images/Vegetable/<%= s.getHinh()%>">
+							<a class="img-change" href="chi_tiet_san_pham?ma_san_pham=<%= s.getMa_san_pham()%>">
 								<img class="img-responsive" src="public/images/<%= s.getHinh()%>" alt="Chilli">
 							</a>
 						</div>

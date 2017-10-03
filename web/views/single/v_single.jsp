@@ -11,8 +11,8 @@
       	  <div class="labout span_1_of_a1">
 			<div class="flexslider">
 					 <ul class="slides">
-                                             <li data-thumb="public/images/Fruit/<%= sp.getHinh()%>">
-							<img src="public/images/Fruit/<%= sp.getHinh()%>" />
+                                             <li data-thumb="public/images/<%= sp.getHinh()%>">
+							<img src="public/images/<%= sp.getHinh()%>" />
 						
 					 </ul>
 				  </div>
@@ -33,7 +33,7 @@
 					<li>Typi non habent claritatem insitam; es</li>
 				</ul>
 			    <div class="wish-list">
-				 	<span class="amount item_price actual"><%= sp.getDon_gia()%></span>
+				 	<span class="amount item_price actual">$<%= sp.getDon_gia()%></span>
 				 </div>
                                  
 				<div class="quantity_box">

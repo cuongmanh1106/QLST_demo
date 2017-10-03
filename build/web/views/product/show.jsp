@@ -52,7 +52,7 @@
                                                 $49.99</h5>
                                             </div>
                                             <div class="rating hidden-sm col-md-6 col-sm-6 col-xs-6">
-                                                <%= sp.getDon_gia()%>
+                                                $<%= sp.getDon_gia()%>
                                             </div>
                                         </div>
                                         <div class="separator clear-left">

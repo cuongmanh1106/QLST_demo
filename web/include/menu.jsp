@@ -5,8 +5,8 @@
 		<li><a href="index.jsp">Home</a></li>
 		<li><a href="#">Catalog ▾</a><span class="dropBottom"></span>
 			<ul class="catalog">
-				<li><a href="#">Fruits & Vegetables</a><span class="dropRight"></span>
-					<ul>
+				<li><a href="#">Meat</a><span class="dropRight"></span>
+<!--					<ul>
 						<li><a href="san_phams?command=snack">Photoshop</a></li>
 						<li><a href="san_phams?command=drink">Illustrator</a></li>
 						<li><a href="#">Web Design</a><span class="dropRight"></span>
@@ -16,11 +16,22 @@
 								<li><a href="#">Comestic</a></li>
 							</ul>
 						</li>
-					</ul>
+					</ul>-->
 				</li>
-				<li><a href="#">Bakery</a></li>
-				<li><a href="#">Meat & Poultry</a></li>
-				<li><a href="#">Comestic</a></li>
+				<li><a href="#">Fruit & Vegetable</a>
+                                    <ul>
+                                        <li><a href="san_phams?command=vegetable">Vegetable</a></li>
+                                        <li><a href="san_phams?command=fruit">Fruit</a></li>
+                                    </ul>
+                                </li>
+				<li><a href="san_phams?command=ingredient">Ingredient</a></li>
+				<li><a href="san_phams?command=seafood">Seafood</a></li>
+                                <li><a href="#">Snack & Drink</a>
+                                    <ul>
+                                        <li><a href="san_phams?command=snack">Snack</a></li>
+                                        <li><a href="san_phams?command=drink">Drink</a></li>
+                                    </ul>
+                                </li>
 			</ul>
 		</li>
 		<li><a href="#">About us</a></li>

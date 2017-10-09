@@ -2,33 +2,34 @@
 		<div class="col-md-3">
             <div class="leftMenu">
   <details>
-    <summary>Fresh Vegetables <span class="glyphicon glyphicon-chevron-down" style="float: right;"></span></summary>
-    <a href="#">Cooking</a>
-    <a href="#">Decorating</a>
-    <a href="#">Drinking</a>
+      <summary><a href="#" style="color:white; text-decoration: none">Meat </a></summary>
+   
   </details>
 
   <details>
-    <summary>Fresh Fruit <span class="glyphicon glyphicon-chevron-down" style="float: right;"></span></summary>
-    <a href="#">Cooking</a>
-    <a href="#">Decorating</a>
-    <a href="#">Drinking</a>
+    <summary>Vegetable & Fruit <span class="glyphicon glyphicon-chevron-down" style="float: right;"></span></summary>
+    <a href="san_phams?command=vegetable">Vegetable</a>
+    <a href="san_phams?command=fruit">Fruit</a>
+    
   </details>
 
   <details>
-    <summary>Poultry & Meat <span class="glyphicon glyphicon-chevron-down" style="float: right;"></span></summary>
-    <a href="#">Beef</a>
-    <a href="#">Pork</a>
-    <a href="#">Chicken</a>
-    <a href="#">Others</a>
+      <summary> <a href="san_phams?command=ingredient" style="color:white; text-decoration: none">Ingredient </a></summary>
+   
   </details>
 
   <details>
-    <summary>Bakery <span class="glyphicon glyphicon-chevron-down" style="float: right;"></span></summary>
-    <a href="#">Hot</a>
-    <a href="#">Cold</a>
-    <a href="#">Fast Food</a>
+      <summary> <a href="san_phams?command=seafood" style="color:white; text-decoration: none">Seafood </a></summary>
+   
   </details>
+                
+  <details>
+    <summary>Snack & Drink <span class="glyphicon glyphicon-chevron-down" style="float: right;"></span></summary>
+    <a href="san_phams?command=snack">Snack</a>
+    <a href="san_phams?command=drink">Drink</a>
+    
+  </details>
+                
 </div>
 
 <div class="leftMenu">

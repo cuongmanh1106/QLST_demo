@@ -799,6 +799,35 @@ public class san_pham_query {
         return list;
     }
     
+    public ArrayList<m_san_pham> Doc_top_san_pham_product() throws SQLException
+    {
+        String query = "SELECT * FROM `san_pham` ORDER BY so_lan_xem DESC limit 0,8";
+        PreparedStatement ps = conn.prepareStatement(query);
+        
+        this.results = ps.executeQuery();
+        
+        ArrayList<m_san_pham> list = new ArrayList<>();
+        
+        while(this.results.next())
+        {
+            m_san_pham sp = new m_san_pham();
+            
+            sp.setMa_san_pham(this.results.getInt("ma_san_pham"));
+            sp.setTen_san_pham(this.results.getString("ten_san_pham"));
+            sp.setMa_loai(this.results.getInt("ma_loai"));
+            sp.setMo_ta_tom_tat(this.results.getString("mo_ta_tom_tat"));
+            sp.setMo_ta_chi_tiet(this.results.getString("mo_ta_chi_tiet"));
+            sp.setDon_gia(this.results.getInt("don_gia"));
+            sp.setHinh(this.results.getString("hinh"));
+            sp.setSan_pham_moi(this.results.getInt("san_pham_moi"));
+            sp.setSo_lan_xem(this.results.getInt("so_lan_xem"));
+            sp.setNgay_tao(this.results.getString("ngay_tao"));
+            list.add(sp);
+            
+        }
+        return list;
+    }
+      
     public ArrayList<m_san_pham> Doc_top_san_pham() throws SQLException
     {
         String query = "SELECT * FROM `san_pham` ORDER BY so_lan_xem DESC limit 0,6";

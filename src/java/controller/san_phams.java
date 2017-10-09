@@ -89,8 +89,12 @@ public class san_phams extends HttpServlet {
             else
                 command = "";
             
+            
             san_pham_query sq = new san_pham_query();
             ArrayList<m_san_pham> list = new ArrayList<>();
+            ArrayList<m_san_pham> top = new ArrayList<>();
+            
+            top = sq.Doc_top_san_pham_product();
             
             int pages = 1;
             int vt = 0;
@@ -312,6 +316,7 @@ public class san_phams extends HttpServlet {
             request.setAttribute("san_phams", list);
             request.setAttribute("count", count);
             request.setAttribute("command", command);
+            request.setAttribute("top", top);
 //            
             String url = "/product.jsp";
             RequestDispatcher dis = request.getRequestDispatcher(url);

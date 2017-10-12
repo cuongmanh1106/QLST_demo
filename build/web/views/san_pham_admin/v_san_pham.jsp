@@ -53,8 +53,8 @@ String thongbao ="";
                             
                              <form method="post" action="search">
                                 <input type="hidden" name="command" value="san_pham">
-                                <input type="text" name="tim" value="">
-                                <input type="submit" value="Tim">
+                                <input type="text" name="tim" placeholder="Nhập tên sản phẩm..." value="">
+                                <input  type="submit" value="Tim" >
                             </form>
                             
                             <form method="post" action="san_phams_admin" >
@@ -121,12 +121,12 @@ String thongbao ="";
                                 <ul class="pagination">
                                      <% 
                                     int dem = 0;
-                                    if(count%5 == 0)
+                                    if(count%10 == 0)
                                     {
-                                        dem = count/5;
+                                        dem = count/10;
                                     }
                                     else
-                                        dem = count/5 + 1;
+                                        dem = count/10 + 1;
                                     for(int i = 1; i <= dem ; i++) {%>
                                     <li><a href="san_phams_admin?pages=<%= i%>&sort=<%= sort%>"><%= i%></a></li>
                                    

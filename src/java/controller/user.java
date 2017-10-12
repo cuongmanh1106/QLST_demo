@@ -136,7 +136,7 @@ public class user extends HttpServlet {
                 else
                 {
                     request.setAttribute("error", "Error mail or password");
-                    url = "/dang_nhap.jsp";
+                    url = "/form_login";
                 }
             break;
                 

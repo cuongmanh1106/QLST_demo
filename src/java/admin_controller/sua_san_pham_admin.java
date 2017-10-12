@@ -88,7 +88,7 @@ public class sua_san_pham_admin extends HttpServlet {
             
             
             
-            String hinh="";
+            
             int ma_san_pham = Integer.parseInt(request.getParameter("ma_san_pham"));
             
             
@@ -103,10 +103,12 @@ public class sua_san_pham_admin extends HttpServlet {
             int don_gia = Integer.parseInt(request.getParameter("don_gia"));
             String spm = (request.getParameter("san_pham_moi").equals("on"))?"1":"0";
             int san_pham_moi = Integer.parseInt(spm);
-            if(request.getParameter("hinh")!=null)
-                hinh = request.getParameter("hinh");
-            else
+            String hinh = request.getParameter("hinh");
+            
+            
+            if(hinh.equals(""))
                 hinh = sp1.getHinh();
+           
             
             sp.setTen_san_pham(ten_san_pham);
             sp.setMa_loai(ma_loai);

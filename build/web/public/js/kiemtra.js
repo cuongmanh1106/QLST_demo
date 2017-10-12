@@ -34,9 +34,17 @@ function Xoaloaisanphamcha(ma_loai_cha)
 
 function Xoasanpham(ma_san_pham)
 {
-	if(confirm("Dữ liệu sẽ bị xóa, Không thể phục hồi lại\nBạn có chắc không?"))
+	if(confirm("Dữ Không thể phục hồi lại\nBạn có chắc không?"))
 	{
 		window.location='xoa_san_pham?ma_san_pham=' + ma_san_pham;
+	}
+}
+
+function Xoakhachhang(ma_khach_hang)
+{
+	if(confirm("Dữ liệu sẽ bị xóa, Không thể phục hồi lại\nBạn có chắc không?"))
+	{
+		window.location='xoa_khach_hang?ma_khach_hang=' + ma_khach_hang;
 	}
 }
 
@@ -56,6 +64,7 @@ function Xoanguoidung(ma_nguoi_dung)
 		window.location='xoa_nguoi_dung?ma_nguoi_dung=' + ma_nguoi_dung;
 	}
 }
+
 
 /* Nâng cao  */
 function Xoadulieu(id_xoa,tbl_xoa,field_xoa)
@@ -192,6 +201,52 @@ function kiemtrasearchso()
       tim.select();
       return false;
     }
+    else if(tim.value == "")
+    {
+        alert("Vui lòng nhập nội dung tìm");
+        return false;
+    }
     return true;
+}
+
+
+function kiemtra_dangki()
+{
+    var hoten = document.getElementById("name");
+    var email = document.getElementById("email");
+    var password = document.getElementById("password");
+    var conf_password = document.getElementById("confirm");
+    var dia_chi = document.getElementById("dia_chi");
+    var dien_thoai = document.getElementById("dien_thoai");
+    
+    if(hoten.value=="")
+    {
+        alert('Vui lòng nhập họ tên');
+        return false;
+    }
+    else if(Number(hoten.value))
+    {
+        alert('Nhập họ tên là chữ');
+        return false;
+    }
+    
+    if(email.value =="")
+    {
+        alert('Vui lòng nhập Email');
+        return false;
+    }
+    
+    if(password.value == "")
+    {
+        alert('Vui lòng nhập password');
+        return false;
+    }
+    else if(password.value != conf_password.value)
+    {
+        alert('Xác nhập mật khẩu chưa đúng');
+        return false;
+    }
+    return true;
+    
 }
  

@@ -3,11 +3,26 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.util.Map;
+import model.Item;
+import model.cart;
 import model.m_khach_hang;
 import model.m_khach_hang;
+import java.util.List;
 import java.util.ArrayList;
 import dbHelpers.san_pham_query;
 import model.m_san_pham;
+import model.m_san_pham;
+import java.util.ArrayList;
+import model.m_san_pham;
+import java.util.ArrayList;
+import model.m_san_pham;
+import model.m_san_pham;
+import java.util.ArrayList;
+import java.util.Map;
+import model.Item;
+import model.m_khach_hang;
+import model.cart;
 
 public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -17,7 +32,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
   private static java.util.List<String> _jspx_dependants;
 
   static {
-    _jspx_dependants = new java.util.ArrayList<String>(15);
+    _jspx_dependants = new java.util.ArrayList<String>(19);
     _jspx_dependants.add("/include/layout.jsp");
     _jspx_dependants.add("/include/head.jsp");
     _jspx_dependants.add("/include/page_header.jsp");
@@ -32,6 +47,10 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_dependants.add("/include/../views/product/../../include/slider_product.jsp");
     _jspx_dependants.add("/include/../views/product/menu_left.jsp");
     _jspx_dependants.add("/include/../views/product/top_product.jsp");
+    _jspx_dependants.add("/include/../views/product/show.jsp");
+    _jspx_dependants.add("/include/../views/single/v_single.jsp");
+    _jspx_dependants.add("/include/../views/single/san_pham_cung_loai.jsp");
+    _jspx_dependants.add("/include/../views/checkout/v_checkout.jsp");
     _jspx_dependants.add("/include/footer.jsp");
   }
 
@@ -76,8 +95,10 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t<link rel=\"stylesheet\" href=\"public_main/css/style.css\">\n");
       out.write("        <link rel=\"stylesheet\" href=\"public_main/css/style_login.css\">\n");
       out.write("        <link rel=\"stylesheet\" href=\"public_main/css/styleNav.css\">\n");
+      out.write("        <link rel=\"stylesheet\" href=\"public_main/css/styleMenu.css\">\n");
       out.write("        <link rel=\"stylesheet\" href=\"puglic_main/css/product_slide.css\">\n");
       out.write("        <link rel=\"stylesheet\" href=\"public_main/css/categoryStyle.css\">\n");
+      out.write("        <script src=\"public/js/kiemtra.js\"></script>\n");
       out.write("\t<link rel=\"stylesheet\" href=\"public_main/fonts/font-awesome-4.3.0/css/font-awesome.min.css\">\n");
       out.write("        <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>\n");
       out.write("\t<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>\n");
@@ -94,6 +115,31 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write('\n');
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+
+     String tim = "";
+    if((String)request.getAttribute("tim")!="")
+        tim = (String) request.getAttribute("tim");
+    
+    m_khach_hang kh = null;
+    
+    if(session.getAttribute("kh")!=null)
+    {
+        kh = (m_khach_hang)session.getAttribute("kh");
+    }
+    
+    cart ca = (cart)session.getAttribute("cart");
+    if(ca == null)
+    {
+        ca = new cart();
+        session.setAttribute("cart", ca);
+    }
+
+      out.write("\n");
       out.write("<div class=\"container\">\n");
       out.write("\t\t<div class=\"logo center col-lg-4 col-md-4 col-sm-4 col-xs-12\">\n");
       out.write("\t\t\t<img class=\"img-responsive\" src=\"public/images/logo_final.png\">\t\n");
@@ -101,10 +147,11 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\t\t<div class=\"col-lg-4 col-md-4 col-sm-4 col-xs-6\">\n");
       out.write("\t\t\t<div class=\"search\">\t\n");
-      out.write("\t\t\t\t<form action=\"#\" method=\"POST\" role=\"search\">\n");
+      out.write("\t\t\t\t<form action=\"Search\" method=\"post\" role=\"search\">\n");
       out.write("\t\t\t\t\t<div class=\"form-group\">\n");
-      out.write("\t\t\t\t\t\t<input type=\"search\" class=\"\" id=\"\" placeholder=\"Search Product ...\">\n");
-      out.write("\t\t\t\t\t\t<button type=\"submit\">\n");
+      out.write("                                            <input type=\"text\" name=\"search\" value=\"\"   placeholder=\"Search Product ...\">\n");
+      out.write("                                            <!--<input type=\"submit\">-->\n");
+      out.write("                                            <button type=\"submit\" >\n");
       out.write("\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-search\"></span>\n");
       out.write("\t\t\t\t\t\t</button>\n");
       out.write("\t\t\t\t\t</div>\n");
@@ -116,39 +163,87 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t</div>\n");
       out.write("\t\t\n");
       out.write("\t\t<div class=\"brand col-lg-4 col-md-4 col-sm-4 col-xs-6\">\n");
-      out.write("                        <span class=\"fa-stack fa-lg login\">\n");
-      out.write("                            login\n");
-      out.write("                            <a href=\"form_login\"><i class=\"fa fa-user fa-stack-2x\" aria-hidden=\"true\"></i></a>\n");
+      out.write("                        <span class=\"fa-stack fa-lg login\"> \n");
+      out.write("                            <a href=\"");
+      out.print( (kh!=null)?"Logout":"form_login");
+      out.write("\" title=\"");
+      out.print( (kh!=null)?"Logout":"Login");
+      out.write("\"><i class=\"fa fa-user fa-stack-2x\" aria-hidden=\"true\"></i></a>\n");
       out.write("                               \n");
       out.write("                        </span>\n");
-      out.write("                    <span class=\"fa-stack fa-lg login\">\n");
-      out.write("                            register\n");
-      out.write("                            <a href=\"form_register\"><i class=\"fa fa-user fa-stack-2x\" aria-hidden=\"true\"></i></a>\n");
-      out.write("                               \n");
-      out.write("                        </span>\n");
+      out.write("                   \n");
       out.write("\t\t\t\n");
-      out.write("\t\t\t<span class=\"fa-stack fa-lg\">\n");
-      out.write("\t\t\t\t<i class=\"fa fa-circle fa-stack-2x\" ></i>\n");
-      out.write("\t\t\t\t<i class=\"fa fa-instagram fa-stack-1x fa-inverse\"></i>\n");
-      out.write("\t\t\t</span>\n");
       out.write("\t\t\t\n");
-      out.write("\t\t\t<span class=\"fa-stack fa-lg\">\n");
-      out.write("\t\t\t\t<i class=\"fa fa-circle fa-stack-2x\"></i>\n");
-      out.write("\t\t\t\t<i class=\"fa fa-facebook fa-stack-1x fa-inverse\"></i>\n");
-      out.write("\t\t\t</span>\n");
       out.write("\n");
       out.write("\t\t\t<span class=\"fa-stack fa-lg\">\n");
-      out.write("\t\t\t\t<i class=\"fa fa-circle fa-stack-2x\"></i>\n");
-      out.write("\t\t\t\t<i class=\"fa fa-twitter fa-stack-1x fa-inverse\"></i>\n");
-      out.write("\t\t\t</span>\n");
-      out.write("\n");
-      out.write("\t\t\t<span class=\"fa-stack fa-lg\">\n");
+      out.write("                            <a href=\"form_register\" title=\"register\">\n");
       out.write("\t\t\t\t<i class=\"fa fa-circle fa-stack-2x\"></i>\n");
       out.write("\t\t\t\t<i class=\"fa fa-users fa-stack-1x fa-inverse\"></i>\n");
+      out.write("                            </a>\n");
       out.write("\t\t\t</span>\n");
+      out.write("                   \n");
+      out.write("                            \n");
+      out.write("                            <ul class=\"icon1 sub-icon1\">\n");
+      out.write("                               \n");
+      out.write("                                <li class=\"sl\"><span style=\"font-size: 15px;\">( ");
+      out.print( (ca.countItem()==0)?"Empty":ca.countItem());
+      out.write(" ) </span>\n");
+      out.write("                                <div class=\"cart\">\n");
+      out.write("                                        \n");
+      out.write("                                        <a href=\"#\" class=\"cart-in\"> </a>\n");
+      out.write("                                            \n");
+      out.write("                                       </div>\n");
+      out.write("                                    <ul class=\"sub-icon1 list\">\n");
+      out.write("                                        <h3>Recently added items(2)</h3>\n");
+      out.write("                                        <div class=\"shopping_cart\">\n");
+      out.write("                                            \n");
+      out.write("                                            ");
+for(Map.Entry<Integer , Item> list: ca.getCartItems().entrySet() ){
+      out.write("\n");
+      out.write("                                            <div class=\"cart_box\">\n");
+      out.write("                                                <div class=\"message\">\n");
+      out.write("                                                    <div class=\"alert-close\"> </div> \n");
+      out.write("                                                    <div class=\"list_img\"><img src=\"public/images/");
+      out.print( list.getValue().getSp().getHinh());
+      out.write("\" class=\"img-responsive\" alt=\"\"></div>\n");
+      out.write("                                                    <div class=\"list_desc\"><h4><a href=\"CartServlet?command=remove&ma_san_pham=");
+      out.print( list.getValue().getSp().getMa_san_pham());
+      out.write('"');
+      out.write('>');
+      out.print( list.getValue().getSp().getTen_san_pham());
+      out.write("</a></h4>1 x<span class=\"actual\">\n");
+      out.write("                                                            ");
+      out.print( list.getValue().getSp().getDon_gia());
+      out.write("</span></div>\n");
+      out.write("                                                    \n");
+      out.write("                                                    <div class=\"clearfix\"></div>\n");
+      out.write("                                                </div>\n");
+      out.write("                                            </div>\n");
+      out.write("                                            ");
+}
+      out.write("\n");
+      out.write("                                            \n");
+      out.write("                                        </div>\n");
+      out.write("                                        <div class=\"total\">\n");
+      out.write("                                            <div class=\"total_left\">CartSubtotal : </div>\n");
+      out.write("                                            <div class=\"total_right\">");
+      out.print( ca.totalCart());
+      out.write("</div>\n");
+      out.write("                                            <div class=\"clearfix\"> </div>\n");
+      out.write("                                        </div>\n");
+      out.write("                                        <div class=\"login_buttons\">\n");
+      out.write("                                            <div class=\"check_button\"><a href=\"xemgiohang\">Check out</a></div>\n");
+      out.write("                                            <div class=\"clearfix\"></div>\n");
+      out.write("                                        </div>\n");
+      out.write("                                        <div class=\"clearfix\"></div>\n");
+      out.write("                                    </ul>\n");
+      out.write("                                </li>\n");
+      out.write("                            </ul>\n");
+      out.write("                       \n");
+      out.write("                        \n");
       out.write("                    ");
 
-                        m_khach_hang kh = null;
+                       
     
                         if(session.getAttribute("kh")!=null)
                         {
@@ -176,25 +271,36 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<div class=\"container\">\n");
       out.write("\t<nav>\n");
       out.write("\t<ul>\n");
-      out.write("\t\t<li><a href=\"#\">Home</a></li>\n");
+      out.write("\t\t<li><a href=\"index.jsp\">Home</a></li>\n");
       out.write("\t\t<li><a href=\"#\">Catalog ▾</a><span class=\"dropBottom\"></span>\n");
       out.write("\t\t\t<ul class=\"catalog\">\n");
-      out.write("\t\t\t\t<li><a href=\"#\">Fruits & Vegetables</a><span class=\"dropRight\"></span>\n");
-      out.write("\t\t\t\t\t<ul>\n");
-      out.write("\t\t\t\t\t\t<li><a href=\"san_phams\">Photoshop</a></li>\n");
-      out.write("\t\t\t\t\t\t<li><a href=\"#\">Illustrator</a></li>\n");
+      out.write("\t\t\t\t<li><a href=\"san_phams\">Meat</a>\n");
+      out.write("<!--\t\t\t\t\t<ul>\n");
+      out.write("\t\t\t\t\t\t<li><a href=\"san_phams?command=snack\">Photoshop</a></li>\n");
+      out.write("\t\t\t\t\t\t<li><a href=\"san_phams?command=drink\">Illustrator</a></li>\n");
       out.write("\t\t\t\t\t\t<li><a href=\"#\">Web Design</a><span class=\"dropRight\"></span>\n");
       out.write("\t\t\t\t\t\t\t<ul>\n");
-      out.write("\t\t\t\t\t\t\t\t<li><a href=\"#\">Bakery</a></li>\n");
-      out.write("\t\t\t\t\t\t\t\t<li><a href=\"#\">Meat & Poultry</a></li>\n");
+      out.write("\t\t\t\t\t\t\t\t<li><a href=\"san_phams?command=seafood\">Bakery</a></li>\n");
+      out.write("\t\t\t\t\t\t\t\t<li><a href=\"san_phams?command=ingredient\">Meat & Poultry</a></li>\n");
       out.write("\t\t\t\t\t\t\t\t<li><a href=\"#\">Comestic</a></li>\n");
       out.write("\t\t\t\t\t\t\t</ul>\n");
       out.write("\t\t\t\t\t\t</li>\n");
-      out.write("\t\t\t\t\t</ul>\n");
+      out.write("\t\t\t\t\t</ul>-->\n");
       out.write("\t\t\t\t</li>\n");
-      out.write("\t\t\t\t<li><a href=\"#\">Bakery</a></li>\n");
-      out.write("\t\t\t\t<li><a href=\"#\">Meat & Poultry</a></li>\n");
-      out.write("\t\t\t\t<li><a href=\"#\">Comestic</a></li>\n");
+      out.write("\t\t\t\t<li><a href=\"#\">Fruit & Vegetable</a>\n");
+      out.write("                                    <ul>\n");
+      out.write("                                        <li><a href=\"san_phams?command=vegetable\">Vegetable</a></li>\n");
+      out.write("                                        <li><a href=\"san_phams?command=fruit\">Fruit</a></li>\n");
+      out.write("                                    </ul>\n");
+      out.write("                                </li>\n");
+      out.write("\t\t\t\t<li><a href=\"san_phams?command=ingredient\">Ingredient</a></li>\n");
+      out.write("\t\t\t\t<li><a href=\"san_phams?command=seafood\">Seafood</a></li>\n");
+      out.write("                                <li><a href=\"#\">Snack & Drink</a>\n");
+      out.write("                                    <ul>\n");
+      out.write("                                        <li><a href=\"san_phams?command=snack\">Snack</a></li>\n");
+      out.write("                                        <li><a href=\"san_phams?command=drink\">Drink</a></li>\n");
+      out.write("                                    </ul>\n");
+      out.write("                                </li>\n");
       out.write("\t\t\t</ul>\n");
       out.write("\t\t</li>\n");
       out.write("\t\t<li><a href=\"#\">About us</a></li>\n");
@@ -417,8 +523,12 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
 
+    san_pham_query sq = new san_pham_query();
+    m_san_pham sp = new m_san_pham();
     
+    ArrayList<m_san_pham> a = sq.Doc_top_san_pham();
     
 
       out.write("\n");
@@ -427,15 +537,23 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t<div class=\"container\">\n");
       out.write("\t\t\t\t<h2 class=\"bs-title\">Best Seller</h2>\n");
       out.write("\t\t\t\t<hr style=\"width: 50px; height: 2px; border-radius: 15px; background: #009344; margin-bottom: 30px\">\n");
-      out.write("                           \n");
+      out.write("                            ");
+ for(m_san_pham s:a) {
+      out.write("\n");
       out.write("\t\t\t\t<div class=\"col-lg-4 col-md-4\">\n");
       out.write("\t\t\t\t\t<div class=\"product-item\">\n");
       out.write("\t\t\t\t\t\t<div class=\"product-img\">\n");
       out.write("\t\t\t\t\t\t\t<p class=\"product-name\">\n");
-      out.write("\t\t\t\t\t\t\t\t<a href=\"#\">asddddddd</a>\n");
+      out.write("\t\t\t\t\t\t\t\t<a href=\"#\">");
+      out.print( s.getTen_san_pham());
+      out.write("</a>\n");
       out.write("\t\t\t\t\t\t\t</p>\n");
-      out.write("\t\t\t\t\t\t\t<a class=\"img-change\" href=\"public/images/Vegetable/otchuong2.jpg\">\n");
-      out.write("\t\t\t\t\t\t\t\t<img class=\"img-responsive\" src=\"public/images/Vegetable/otchuong2.jpg\" alt=\"Chilli\">\n");
+      out.write("\t\t\t\t\t\t\t<a class=\"img-change\" href=\"chi_tiet_san_pham?ma_san_pham=");
+      out.print( s.getMa_san_pham());
+      out.write("\">\n");
+      out.write("\t\t\t\t\t\t\t\t<img class=\"img-responsive\" src=\"public/images/");
+      out.print( s.getHinh());
+      out.write("\" alt=\"Chilli\">\n");
       out.write("\t\t\t\t\t\t\t</a>\n");
       out.write("\t\t\t\t\t\t</div>\n");
       out.write("\t\t\t\t\t\t<div class=\"product-info\">\n");
@@ -445,8 +563,11 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t\t<div class=\"product-cart\">\n");
       out.write("\t\t\t\t\t\t\t\t<form>\n");
       out.write("\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t<a href=\"#\">\t\n");
+      out.write("\t\t\t\t\t\t\t\t\t<a href=\"CartServlet?command=plus&ma_san_pham=");
+      out.print( s.getMa_san_pham());
+      out.write("\">\t\n");
       out.write("\t\t\t\t\t\t\t\t\t\t<span class=\"fa-stack fa-lg\">\n");
+      out.write("                                                                                    \n");
       out.write("\t\t\t\t\t\t\t\t\t\t\t<i class=\"fa fa-circle fa-stack-2x fa-bg\" ></i>\n");
       out.write("\t\t\t\t\t\t\t\t\t\t\t<i class=\"fa fa-shopping-cart fa-stack-1x fa-icon\"></i>\n");
       out.write("\t\t\t\t\t\t\t\t\t\t</span>\n");
@@ -456,151 +577,11 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t</div>\n");
       out.write("\t\t\t\t\t</div>\n");
       out.write("\t\t\t\t</div>\n");
+      out.write("                            ");
+}
+      out.write("\n");
       out.write("                         \n");
-      out.write("\t\t\t\t<div class=\"col-lg-4 col-md-4\">\n");
-      out.write("\t\t\t\t\t<div class=\"product-item\">\n");
-      out.write("\t\t\t\t\t\t<div class=\"product-img\">\n");
-      out.write("\t\t\t\t\t\t\t<p class=\"product-name\">\n");
-      out.write("\t\t\t\t\t\t\t\t<a href=\"#\">Cherry</a>\n");
-      out.write("\t\t\t\t\t\t\t</p>\n");
-      out.write("\t\t\t\t\t\t\t<a class=\"img-change\" href=\"public/images/Vegetable/otchuong2.jpg\">\n");
-      out.write("\t\t\t\t\t\t\t\t<img class=\"img-responsive\" src=\"public/images/Fruit/cherry2.jpg\" alt=\"Chilli\">\n");
-      out.write("\t\t\t\t\t\t\t</a>\n");
-      out.write("\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t\t<div class=\"product-info\">\n");
-      out.write("\t\t\t\t\t\t\t<p class=\"product-price\">\n");
-      out.write("\t\t\t\t\t\t\t\t<span class=\"money\" data-currency-usd=\"$30.00\">$30.00</span>\n");
-      out.write("\t\t\t\t\t\t\t</p>\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"product-cart\">\n");
-      out.write("\t\t\t\t\t\t\t\t<form>\n");
-      out.write("\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t<a href=\"#\">\t\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<span class=\"fa-stack fa-lg\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t<i class=\"fa fa-circle fa-stack-2x fa-bg\" ></i>\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t<i class=\"fa fa-shopping-cart fa-stack-1x fa-icon\"></i>\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t</span>\n");
-      out.write("\t\t\t\t\t\t\t\t\t</a>\n");
-      out.write("\t\t\t\t\t\t\t\t</form>\n");
-      out.write("\t\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t</div>\n");
       out.write("\n");
-      out.write("\t\t\t\t<div class=\"col-lg-4 col-md-4\">\n");
-      out.write("\t\t\t\t\t<div class=\"product-item\">\n");
-      out.write("\t\t\t\t\t\t<div class=\"product-img\">\n");
-      out.write("\t\t\t\t\t\t\t<p class=\"product-name\">\n");
-      out.write("\t\t\t\t\t\t\t\t<a href=\"#\">Frog</a>\n");
-      out.write("\t\t\t\t\t\t\t</p>\n");
-      out.write("\t\t\t\t\t\t\t<a class=\"img-change\" href=\"public/images/Vegetable/otchuong2.jpg\">\n");
-      out.write("\t\t\t\t\t\t\t\t<img class=\"img-responsive\" src=\"public/images/Beef/ech.jpg\" alt=\"Chilli\">\n");
-      out.write("\t\t\t\t\t\t\t</a>\n");
-      out.write("\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t\t<div class=\"product-info\">\n");
-      out.write("\t\t\t\t\t\t\t<p class=\"product-price\">\n");
-      out.write("\t\t\t\t\t\t\t\t<span class=\"money\" data-currency-usd=\"$30.00\">$30.00</span>\n");
-      out.write("\t\t\t\t\t\t\t</p>\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"product-cart\">\n");
-      out.write("\t\t\t\t\t\t\t\t<form>\n");
-      out.write("\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t<a href=\"#\">\t\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<span class=\"fa-stack fa-lg\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t<i class=\"fa fa-circle fa-stack-2x fa-bg\" ></i>\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t<i class=\"fa fa-shopping-cart fa-stack-1x fa-icon\"></i>\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t</span>\n");
-      out.write("\t\t\t\t\t\t\t\t\t</a>\n");
-      out.write("\t\t\t\t\t\t\t\t</form>\n");
-      out.write("\t\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t</div>\n");
-      out.write("\n");
-      out.write("\t\t\t\t<div class=\"col-lg-4 col-md-4\">\n");
-      out.write("\t\t\t\t\t<div class=\"product-item\">\n");
-      out.write("\t\t\t\t\t\t<div class=\"product-img\">\n");
-      out.write("\t\t\t\t\t\t\t<p class=\"product-name\">\n");
-      out.write("\t\t\t\t\t\t\t\t<a href=\"#\">Watermelon</a>\n");
-      out.write("\t\t\t\t\t\t\t</p>\n");
-      out.write("\t\t\t\t\t\t\t<a class=\"img-change\" href=\"public/images/Vegetable/otchuong2.jpg\">\n");
-      out.write("\t\t\t\t\t\t\t\t<img class=\"img-responsive\" src=\"public/images/Fruit/watermelon2.jpg\" alt=\"Chilli\">\n");
-      out.write("\t\t\t\t\t\t\t</a>\n");
-      out.write("\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t\t<div class=\"product-info\">\n");
-      out.write("\t\t\t\t\t\t\t<p class=\"product-price\">\n");
-      out.write("\t\t\t\t\t\t\t\t<span class=\"money\" data-currency-usd=\"$30.00\">$30.00</span>\n");
-      out.write("\t\t\t\t\t\t\t</p>\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"product-cart\">\n");
-      out.write("\t\t\t\t\t\t\t\t<form>\n");
-      out.write("\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t<a href=\"#\">\t\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<span class=\"fa-stack fa-lg\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t<i class=\"fa fa-circle fa-stack-2x fa-bg\" ></i>\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t<i class=\"fa fa-shopping-cart fa-stack-1x fa-icon\"></i>\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t</span>\n");
-      out.write("\t\t\t\t\t\t\t\t\t</a>\n");
-      out.write("\t\t\t\t\t\t\t\t</form>\n");
-      out.write("\t\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t</div>\n");
-      out.write("\n");
-      out.write("\t\t\t\t<div class=\"col-lg-4 col-md-4\">\n");
-      out.write("\t\t\t\t\t<div class=\"product-item\">\n");
-      out.write("\t\t\t\t\t\t<div class=\"product-img\">\n");
-      out.write("\t\t\t\t\t\t\t<p class=\"product-name\">\n");
-      out.write("\t\t\t\t\t\t\t\t<a href=\"#\">Banana</a>\n");
-      out.write("\t\t\t\t\t\t\t</p>\n");
-      out.write("\t\t\t\t\t\t\t<a class=\"img-change\" href=\"public/images/Vegetable/otchuong2.jpg\">\n");
-      out.write("\t\t\t\t\t\t\t\t<img class=\"img-responsive\" src=\"public/images/Fruit/banana2.jpg\" alt=\"Chilli\">\n");
-      out.write("\t\t\t\t\t\t\t</a>\n");
-      out.write("\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t\t<div class=\"product-info\">\n");
-      out.write("\t\t\t\t\t\t\t<p class=\"product-price\">\n");
-      out.write("\t\t\t\t\t\t\t\t<span class=\"money\" data-currency-usd=\"$30.00\">$30.00</span>\n");
-      out.write("\t\t\t\t\t\t\t</p>\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"product-cart\">\n");
-      out.write("\t\t\t\t\t\t\t\t<form>\n");
-      out.write("\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t<a href=\"#\">\t\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<span class=\"fa-stack fa-lg\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t<i class=\"fa fa-circle fa-stack-2x fa-bg\" ></i>\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t<i class=\"fa fa-shopping-cart fa-stack-1x fa-icon\"></i>\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t</span>\n");
-      out.write("\t\t\t\t\t\t\t\t\t</a>\n");
-      out.write("\t\t\t\t\t\t\t\t</form>\n");
-      out.write("\t\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t</div>\n");
-      out.write("\n");
-      out.write("\t\t\t\t<div class=\"col-lg-4 col-md-4\">\n");
-      out.write("\t\t\t\t\t<div class=\"product-item\">\n");
-      out.write("\t\t\t\t\t\t<div class=\"product-img\">\n");
-      out.write("\t\t\t\t\t\t\t<p class=\"product-name\">\n");
-      out.write("\t\t\t\t\t\t\t\t<a href=\"#\">Chilli</a>\n");
-      out.write("\t\t\t\t\t\t\t</p>\n");
-      out.write("\t\t\t\t\t\t\t<a class=\"img-change\" href=\"public/images/Vegetable/otchuong2.jpg\">\n");
-      out.write("\t\t\t\t\t\t\t\t<img class=\"img-responsive\" src=\"public/images/Beef/baroi.jpg\" alt=\"Chilli\">\n");
-      out.write("\t\t\t\t\t\t\t</a>\n");
-      out.write("\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t\t<div class=\"product-info\">\n");
-      out.write("\t\t\t\t\t\t\t<p class=\"product-price\">\n");
-      out.write("\t\t\t\t\t\t\t\t<span class=\"money\" data-currency-usd=\"$30.00\">$30.00</span>\n");
-      out.write("\t\t\t\t\t\t\t</p>\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"product-cart\">\n");
-      out.write("\t\t\t\t\t\t\t\t<form>\n");
-      out.write("\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t<a href=\"#\">\t\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<span class=\"fa-stack fa-lg\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t<i class=\"fa fa-circle fa-stack-2x fa-bg\" ></i>\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t<i class=\"fa fa-shopping-cart fa-stack-1x fa-icon\"></i>\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t</span>\n");
-      out.write("\t\t\t\t\t\t\t\t\t</a>\n");
-      out.write("\t\t\t\t\t\t\t\t</form>\n");
-      out.write("\t\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t</div>\n");
       out.write("                            \n");
       out.write("\t\n");
       out.write("</div>\n");
@@ -687,19 +668,20 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write('\n');
       out.write("\n");
       out.write("\n");
-      out.write("<head> \n");
+      out.write("<!--<head> \n");
       out.write("\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n");
       out.write("\n");
       out.write("\n");
-      out.write("\t\t<!-- Website CSS style -->\n");
+      out.write("\t\t Website CSS style \n");
       out.write("\t\t<link href=\"../../public/css/bootstrap.min.css\" rel=\"stylesheet\">\n");
       out.write("\n");
-      out.write("\t\t<!-- Website Font style -->\n");
+      out.write("\t\t Website Font style \n");
       out.write("\t    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css\">\n");
       out.write("\t\t<link rel=\"stylesheet\" href=\"../../public_main/css/style.css\">\n");
-      out.write("\t\t<!-- Google Fonts -->\n");
+      out.write("\t\t Google Fonts \n");
       out.write("\t\t<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>\n");
       out.write("\t\t<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>\n");
+      out.write("                <script src=\"../../public/js/kiemtra.js\"></script>\n");
       out.write("                            \n");
       out.write("\n");
       out.write("\n");
@@ -707,7 +689,8 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t</head>\n");
       out.write("                \n");
       out.write("\t\t\n");
-      out.write("<body>\t\n");
+      out.write("<body>\t-->\n");
+      out.write("\n");
       out.write("\t\t<div class=\"container\">\n");
       out.write("\t\t\t<div class=\"row main\">\n");
       out.write("\t\t\t\t<div class=\"main-login main-center\">\n");
@@ -716,7 +699,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t\n");
       out.write("\t\t\t\t\t\t<div class=\"form-group\">\n");
       out.write("                                                    <input name=\"command\" value=\"dangki\" type=\"hidden\">\n");
-      out.write("\t\t\t\t\t\t\t<label for=\"name\" class=\"cols-sm-2 control-label\">Your Name</label>\n");
+      out.write("\t\t\t\t\t\t\t<label for=\"name\" class=\"cols-sm-2 control-label\">Your Name (*)</label>\n");
       out.write("\t\t\t\t\t\t\t<div class=\"cols-sm-10\">\n");
       out.write("\t\t\t\t\t\t\t\t<div class=\"input-group\">\n");
       out.write("\t\t\t\t\t\t\t\t\t<span class=\"input-group-addon\"><i class=\"fa fa-user fa\" aria-hidden=\"true\"></i></span>\n");
@@ -726,17 +709,17 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t</div>\n");
       out.write("\n");
       out.write("\t\t\t\t\t\t<div class=\"form-group\">\n");
-      out.write("\t\t\t\t\t\t\t<label for=\"email\" class=\"cols-sm-2 control-label\">Your Email</label>\n");
+      out.write("\t\t\t\t\t\t\t<label for=\"email\" class=\"cols-sm-2 control-label\">Your Email (*)</label>\n");
       out.write("\t\t\t\t\t\t\t<div class=\"cols-sm-10\">\n");
       out.write("\t\t\t\t\t\t\t\t<div class=\"input-group\">\n");
       out.write("\t\t\t\t\t\t\t\t\t<span class=\"input-group-addon\"><i class=\"fa fa-envelope fa\" aria-hidden=\"true\"></i></span>\n");
-      out.write("\t\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"email\" id=\"email\"  placeholder=\"Enter your Email\"/>\n");
+      out.write("\t\t\t\t\t\t\t\t\t<input type=\"email\" class=\"form-control\" name=\"email\" id=\"email\"  placeholder=\"Enter your Email\"/>\n");
       out.write("\t\t\t\t\t\t\t\t</div>\n");
       out.write("\t\t\t\t\t\t\t</div>\n");
       out.write("\t\t\t\t\t\t</div>\n");
       out.write("\n");
       out.write("\t\t\t\t\t\t<div class=\"form-group\">\n");
-      out.write("\t\t\t\t\t\t\t<label for=\"password\" class=\"cols-sm-2 control-label\">Password</label>\n");
+      out.write("\t\t\t\t\t\t\t<label for=\"password\" class=\"cols-sm-2 control-label\">Password (*)</label>\n");
       out.write("\t\t\t\t\t\t\t<div class=\"cols-sm-10\">\n");
       out.write("\t\t\t\t\t\t\t\t<div class=\"input-group\">\n");
       out.write("\t\t\t\t\t\t\t\t\t<span class=\"input-group-addon\"><i class=\"fa fa-lock fa-lg\" aria-hidden=\"true\"></i></span>\n");
@@ -746,7 +729,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t</div>\n");
       out.write("\n");
       out.write("\t\t\t\t\t\t<div class=\"form-group\">\n");
-      out.write("\t\t\t\t\t\t\t<label for=\"confirm\" class=\"cols-sm-2 control-label\">Confirm Password</label>\n");
+      out.write("\t\t\t\t\t\t\t<label for=\"confirm\" class=\"cols-sm-2 control-label\">Confirm Password (*)</label>\n");
       out.write("\t\t\t\t\t\t\t<div class=\"cols-sm-10\">\n");
       out.write("\t\t\t\t\t\t\t\t<div class=\"input-group\">\n");
       out.write("\t\t\t\t\t\t\t\t\t<span class=\"input-group-addon\"><i class=\"fa fa-lock fa-lg\" aria-hidden=\"true\"></i></span>\n");
@@ -801,7 +784,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                            \n");
       out.write("\n");
       out.write("\t\t\t\t\t\t<div class=\"form-group \">\n");
-      out.write("                                                    <input type=\"submit\" class=\"btn btn-primary btn-lg btn-block login-button\">\n");
+      out.write("                                                    <input type=\"submit\" class=\"btn btn-primary btn-lg btn-block login-button\" onclick=\"return kiemtra_dangki()\">\n");
       out.write("\t\t\t\t\t\t</div>\n");
       out.write("\t\t\t\t\t\t\n");
       out.write("\t\t\t\t\t</form>\n");
@@ -813,11 +796,11 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("   \t\n");
       out.write("\n");
       out.write("\t\t <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->\n");
-      out.write("    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js\"></script>\n");
+      out.write("    <!--<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js\"></script>-->\n");
       out.write("    <!-- Include all compiled plugins (below), or include individual files as needed -->\n");
-      out.write("    <script src=\"../../public/js/bootstrap.min.js\"></script>\n");
-      out.write("\t</body>\n");
-      out.write("</html>");
+      out.write("    <!--<script src=\"../../public/js/bootstrap.min.js\"></script>-->\n");
+      out.write("\t<!--</body>-->\n");
+      out.write("<!--</html>-->");
       out.write('\r');
       out.write('\n');
 
@@ -856,33 +839,34 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t<div class=\"col-md-3\">\n");
       out.write("            <div class=\"leftMenu\">\n");
       out.write("  <details>\n");
-      out.write("    <summary>Fresh Vegetables <span class=\"glyphicon glyphicon-chevron-down\" style=\"float: right;\"></span></summary>\n");
-      out.write("    <a href=\"#\">Cooking</a>\n");
-      out.write("    <a href=\"#\">Decorating</a>\n");
-      out.write("    <a href=\"#\">Drinking</a>\n");
+      out.write("      <summary><a href=\"#\" style=\"color:white; text-decoration: none\">Meat </a></summary>\n");
+      out.write("   \n");
       out.write("  </details>\n");
       out.write("\n");
       out.write("  <details>\n");
-      out.write("    <summary>Fresh Fruit <span class=\"glyphicon glyphicon-chevron-down\" style=\"float: right;\"></span></summary>\n");
-      out.write("    <a href=\"#\">Cooking</a>\n");
-      out.write("    <a href=\"#\">Decorating</a>\n");
-      out.write("    <a href=\"#\">Drinking</a>\n");
+      out.write("    <summary>Vegetable & Fruit <span class=\"glyphicon glyphicon-chevron-down\" style=\"float: right;\"></span></summary>\n");
+      out.write("    <a href=\"san_phams?command=vegetable\">Vegetable</a>\n");
+      out.write("    <a href=\"san_phams?command=fruit\">Fruit</a>\n");
+      out.write("    \n");
       out.write("  </details>\n");
       out.write("\n");
       out.write("  <details>\n");
-      out.write("    <summary>Poultry & Meat <span class=\"glyphicon glyphicon-chevron-down\" style=\"float: right;\"></span></summary>\n");
-      out.write("    <a href=\"#\">Beef</a>\n");
-      out.write("    <a href=\"#\">Pork</a>\n");
-      out.write("    <a href=\"#\">Chicken</a>\n");
-      out.write("    <a href=\"#\">Others</a>\n");
+      out.write("      <summary> <a href=\"san_phams?command=ingredient\" style=\"color:white; text-decoration: none\">Ingredient </a></summary>\n");
+      out.write("   \n");
       out.write("  </details>\n");
       out.write("\n");
       out.write("  <details>\n");
-      out.write("    <summary>Bakery <span class=\"glyphicon glyphicon-chevron-down\" style=\"float: right;\"></span></summary>\n");
-      out.write("    <a href=\"#\">Hot</a>\n");
-      out.write("    <a href=\"#\">Cold</a>\n");
-      out.write("    <a href=\"#\">Fast Food</a>\n");
+      out.write("      <summary> <a href=\"san_phams?command=seafood\" style=\"color:white; text-decoration: none\">Seafood </a></summary>\n");
+      out.write("   \n");
       out.write("  </details>\n");
+      out.write("                \n");
+      out.write("  <details>\n");
+      out.write("    <summary>Snack & Drink <span class=\"glyphicon glyphicon-chevron-down\" style=\"float: right;\"></span></summary>\n");
+      out.write("    <a href=\"san_phams?command=snack\">Snack</a>\n");
+      out.write("    <a href=\"san_phams?command=drink\">Drink</a>\n");
+      out.write("    \n");
+      out.write("  </details>\n");
+      out.write("                \n");
       out.write("</div>\n");
       out.write("\n");
       out.write("<div class=\"leftMenu\">\n");
@@ -909,6 +893,13 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("</div>      \n");
       out.write("        </div>");
       out.write('\n');
+      out.write('\n');
+      out.write('\n');
+
+    ArrayList<m_san_pham> top = (ArrayList)request.getAttribute("top");
+
+      out.write("\n");
+      out.write("\n");
       out.write("<div class=\"col-md-9\">\n");
       out.write("        <div class=\"row\">\n");
       out.write("\t\t\t<div class=\"row\">\n");
@@ -928,30 +919,63 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t<div id=\"carousel-example\" class=\"carousel slide\" data-ride=\"carousel\">\n");
       out.write("\t\t\t\t<!-- Wrapper for slides -->\n");
       out.write("\t\t\t\t<div class=\"carousel-inner\">\n");
-      out.write("\t\t\t\t\t<div class=\"item active\">\n");
+      out.write("                                    \n");
+      out.write("                            ");
+
+                                int dem3 = 0;
+                                int dem2 = 0;
+                                for(m_san_pham s:top)
+                                {
+                                    if(dem2 == 0)
+                                    {
+                            
+      out.write("\n");
+      out.write("\t\t\t\t\t<div class=\"item ");
+      out.print( (dem3==0 && (dem3%4)==0)?"active":"" );
+      out.write("\">\n");
       out.write("\t\t\t\t\t\t<div class=\"row\">\n");
+      out.write("                                    ");
+
+                                        dem2++;
+                                        dem3++;
+                                    }
+                                    if(dem2 <= 4)
+                                    {
+                                    
+      out.write("\n");
+      out.write("                                    \n");
       out.write("\n");
       out.write("\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-sm-3\">\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-item\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t<div class=\"photo\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<img src=\"images/Fruit/apple.jpg\" class=\"img-responsive\" alt=\"a\" />\n");
-      out.write("\t\t\t\t\t\t\t\t\t</div>\n");
-      out.write("\t\t\t\t\t\t\t\t\t<div class=\"info\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<div class=\"row\">\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t<div class=\"rating col-md-6 col-sm-6 col-xs-6\" style=\"text-align: left;\">\n");
+      out.write("                            <div class=\"col-sm-3\">\n");
+      out.write("                                    <div class=\"col-item\">\n");
+      out.write("                                            <div class=\"photo\">\n");
+      out.write("                                                <a href=\"chi_tiet_san_pham?ma_san_pham=");
+      out.print( s.getMa_san_pham());
+      out.write("\" title=\"view details\"><img src=\"public/images/");
+      out.print( s.getHinh());
+      out.write("\" class=\"img-responsive\" alt=\"a\" /></a>\n");
+      out.write("                                            </div>\n");
+      out.write("                                            <div class=\"info\">\n");
+      out.write("                                                    <div class=\"row\">\n");
+      out.write("                                                            <div class=\"rating col-md-6 col-sm-6 col-xs-6\" style=\"text-align: left;\">\n");
       out.write("\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t\tApple\n");
+      out.write("                                                                    ");
+      out.print( s.getTen_san_pham());
+      out.write("\n");
       out.write("                                            <!-- <h5 class=\"price-text-color\">\n");
       out.write("                                            $199.99</h5> -->\n");
       out.write("                                        </div>\n");
       out.write("                                        <div class=\"rating hidden-sm col-md-6 col-sm-6 col-xs-6\">\n");
-      out.write("                                        \t30.00$\n");
+      out.write("                                        \t$ ");
+      out.print( s.getDon_gia());
+      out.write("\n");
       out.write("                                        </div>\n");
       out.write("                                    </div>\n");
       out.write("                                    <div class=\"separator clear-left\">\n");
       out.write("                                    \t<p class=\"btn-add\">\n");
-      out.write("                                    \t\t<i class=\"fa fa-shopping-cart\"></i><a href=\"#\" class=\"hidden-sm\">Add to cart</a></p>\n");
+      out.write("                                    \t\t<a href=\"CartServlet?command=plus&ma_san_pham=");
+      out.print( s.getMa_san_pham());
+      out.write("\" class=\"hidden-sm\"><i class=\"fa fa-shopping-cart\"></i>Add to cart</a></p>\n");
       out.write("                                    \t\t<!--  -->\n");
       out.write("                                    \t</div>\n");
       out.write("                                    \t<div class=\"clearfix\">\n");
@@ -959,205 +983,390 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                    </div>\n");
       out.write("                                </div>\n");
       out.write("                            </div>\n");
+      out.write("                                 ");
+
+                                    dem2++;
+                                    dem3++;
+                                    }
+                                    if(dem2 >4)
+                                    {
+                                 
       out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("                            <div class=\"col-sm-3\">\n");
-      out.write("                            \t<div class=\"col-item\">\n");
-      out.write("                            \t\t<div class=\"photo\">\n");
-      out.write("                            \t\t\t<img src=\"images/Fruit/banana2.jpg\" class=\"img-responsive\" alt=\"a\" />\n");
-      out.write("                            \t\t</div>\n");
-      out.write("                            \t\t<div class=\"info\">\n");
-      out.write("                            \t\t\t<div class=\"row\">\n");
-      out.write("                            \t\t\t\t<div class=\"rating col-md-6 col-sm-6 col-xs-6\" style=\"text-align: left;\">\n");
-      out.write("                            \t\t\t\t\tBanana\n");
-      out.write("                                            <!-- <h5 class=\"price-text-color\">\n");
-      out.write("                                            $199.99</h5> -->\n");
-      out.write("                                        </div>\n");
-      out.write("                                        <div class=\"rating hidden-sm col-md-6 col-sm-6 col-xs-6\">\n");
-      out.write("                                        \t19.00$\n");
-      out.write("                                        </div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"separator clear-left\">\n");
-      out.write("                                    \t<p class=\"btn-add\">\n");
-      out.write("                                    \t\t<i class=\"fa fa-shopping-cart\"></i><a href=\"#\" class=\"hidden-sm\">Add to cart</a></p>\n");
-      out.write("\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    \t<div class=\"clearfix\">\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    </div>\n");
+      out.write("                                  </div>\n");
       out.write("                                </div>\n");
-      out.write("                            </div>\n");
+      out.write("                                ");
+
+                                    dem3++;
+                                    dem2=0;
+                                    }
+                                
       out.write("\n");
       out.write("\n");
-      out.write("                            <div class=\"col-sm-3\">\n");
-      out.write("                            \t<div class=\"col-item\">\n");
-      out.write("                            \t\t<div class=\"photo\">\n");
-      out.write("                            \t\t\t<img src=\"images/Fruit/watermelon.jpg\" class=\"img-responsive\" alt=\"a\" />\n");
-      out.write("                            \t\t</div>\n");
-      out.write("                            \t\t<div class=\"info\">\n");
-      out.write("                            \t\t\t<div class=\"row\">\n");
-      out.write("                            \t\t\t\t<div class=\"rating col-md-6 col-sm-6 col-xs-6\" style=\"text-align: left;\">\n");
-      out.write("                            \t\t\t\t\tWatermelon\n");
-      out.write("                                            <!-- <h5 class=\"price-text-color\">\n");
-      out.write("                                            $199.99</h5> -->\n");
-      out.write("                                        </div>\n");
-      out.write("                                        <div class=\"rating hidden-sm col-md-6 col-sm-6 col-xs-6\">\n");
-      out.write("                                        \t9.99$\n");
-      out.write("                                        </div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"separator clear-left\">\n");
-      out.write("                                    \t<p class=\"btn-add\">\n");
-      out.write("                                    \t\t<i class=\"fa fa-shopping-cart\"></i><a href=\"#\" class=\"hidden-sm\">Add to cart</a></p>\n");
+      out.write("                        \n");
+      out.write("                                                    \n");
+      out.write("                        ");
+
+                            }
+                        
       out.write("\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    \t<div class=\"clearfix\">\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
+      out.write("                       \n");
       out.write("\n");
-      out.write("                            <div class=\"col-sm-3\">\n");
-      out.write("                            \t<div class=\"col-item\">\n");
-      out.write("                            \t\t<div class=\"photo\">\n");
-      out.write("                            \t\t\t<img src=\"images/Fruit/dragonfruit2.jpg\" class=\"img-responsive\" alt=\"a\" />\n");
-      out.write("                            \t\t</div>\n");
-      out.write("                            \t\t<div class=\"info\">\n");
-      out.write("                            \t\t\t<div class=\"row\">\n");
-      out.write("                            \t\t\t\t<div class=\"rating col-md-6 col-sm-6 col-xs-6\" style=\"text-align: left;\">\n");
-      out.write("                            \t\t\t\t\tDragonfruit\n");
-      out.write("                                            <!-- <h5 class=\"price-text-color\">\n");
-      out.write("                                            $199.99</h5> -->\n");
-      out.write("                                        </div>\n");
-      out.write("                                        <div class=\"rating hidden-sm col-md-6 col-sm-6 col-xs-6\">\n");
-      out.write("                                        \t15.00$\n");
-      out.write("                                        </div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"separator clear-left\">\n");
-      out.write("                                    \t<p class=\"btn-add\">\n");
-      out.write("                                    \t\t<i class=\"fa fa-shopping-cart\"></i><a href=\"#\" class=\"hidden-sm\">Add to cart</a></p>\n");
-      out.write("\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    \t<div class=\"clearfix\">\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </div>\n");
-      out.write("                    </div>\n");
-      out.write("\n");
-      out.write("                    <div class=\"item\">\n");
-      out.write("                    \t<div class=\"row\">\n");
-      out.write("                    \t\t<div class=\"col-sm-3\">\n");
-      out.write("                    \t\t\t<div class=\"col-item\">\n");
-      out.write("                    \t\t\t\t<div class=\"photo\">\n");
-      out.write("                    \t\t\t\t\t<img src=\"images/Fruit/apple.jpg\" class=\"img-responsive\" alt=\"a\" />\n");
-      out.write("                    \t\t\t\t</div>\n");
-      out.write("                    \t\t\t\t<div class=\"info\">\n");
-      out.write("                    \t\t\t\t\t<div class=\"row\">\n");
-      out.write("                    \t\t\t\t\t\t<div class=\"rating col-md-6 col-sm-6 col-xs-6\" style=\"text-align: left;\">\n");
-      out.write("                    \t\t\t\t\t\t\tApple\n");
-      out.write("                                            <!-- <h5 class=\"price-text-color\">\n");
-      out.write("                                            $199.99</h5> -->\n");
-      out.write("                                        </div>\n");
-      out.write("                                        <div class=\"rating hidden-sm col-md-6 col-sm-6 col-xs-6\">\n");
-      out.write("                                        \t30.00$\n");
-      out.write("                                        </div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"separator clear-left\">\n");
-      out.write("                                    \t<p class=\"btn-add\">\n");
-      out.write("                                    \t\t<i class=\"fa fa-shopping-cart\"></i><a href=\"#\" class=\"hidden-sm\">Add to cart</a></p>\n");
-      out.write("\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    \t<div class=\"clearfix\">\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                            <div class=\"col-sm-3\">\n");
-      out.write("                            \t<div class=\"col-item\">\n");
-      out.write("                            \t\t<div class=\"photo\">\n");
-      out.write("                            \t\t\t<img src=\"images/Fruit/apple.jpg\" class=\"img-responsive\" alt=\"a\" />\n");
-      out.write("                            \t\t</div>\n");
-      out.write("                            \t\t<div class=\"info\">\n");
-      out.write("                            \t\t\t<div class=\"row\">\n");
-      out.write("                            \t\t\t\t<div class=\"rating col-md-6 col-sm-6 col-xs-6\" style=\"text-align: left;\">\n");
-      out.write("                            \t\t\t\t\tApple\n");
-      out.write("                                            <!-- <h5 class=\"price-text-color\">\n");
-      out.write("                                            $199.99</h5> -->\n");
-      out.write("                                        </div>\n");
-      out.write("                                        <div class=\"rating hidden-sm col-md-6 col-sm-6 col-xs-6\">\n");
-      out.write("                                        \t30.00$\n");
-      out.write("                                        </div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"separator clear-left\">\n");
-      out.write("                                    \t<p class=\"btn-add\">\n");
-      out.write("                                    \t\t<i class=\"fa fa-shopping-cart\"></i><a href=\"#\" class=\"hidden-sm\">Add to cart</a></p>\n");
-      out.write("\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    \t<div class=\"clearfix\">\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                            <div class=\"col-sm-3\">\n");
-      out.write("                            \t<div class=\"col-item\">\n");
-      out.write("                            \t\t<div class=\"photo\">\n");
-      out.write("                            \t\t\t<img src=\"images/Fruit/apple.jpg\" class=\"img-responsive\" alt=\"a\" />\n");
-      out.write("                            \t\t</div>\n");
-      out.write("                            \t\t<div class=\"info\">\n");
-      out.write("                            \t\t\t<div class=\"row\">\n");
-      out.write("                            \t\t\t\t<div class=\"rating col-md-6 col-sm-6 col-xs-6\" style=\"text-align: left;\">\n");
-      out.write("                            \t\t\t\t\tApple\n");
-      out.write("                                            <!-- <h5 class=\"price-text-color\">\n");
-      out.write("                                            $199.99</h5> -->\n");
-      out.write("                                        </div>\n");
-      out.write("                                        <div class=\"rating hidden-sm col-md-6 col-sm-6 col-xs-6\">\n");
-      out.write("                                        \t30.00$\n");
-      out.write("                                        </div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"separator clear-left\">\n");
-      out.write("                                    \t<p class=\"btn-add\">\n");
-      out.write("                                    \t\t<i class=\"fa fa-shopping-cart\"></i><a href=\"#\" class=\"hidden-sm\">Add to cart</a></p>\n");
-      out.write("\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    \t<div class=\"clearfix\">\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                            <div class=\"col-sm-3\">\n");
-      out.write("                            \t<div class=\"col-item\">\n");
-      out.write("                            \t\t<div class=\"photo\">\n");
-      out.write("                            \t\t\t<img src=\"images/Fruit/apple.jpg\" class=\"img-responsive\" alt=\"a\" />\n");
-      out.write("                            \t\t</div>\n");
-      out.write("                            \t\t<div class=\"info\">\n");
-      out.write("                            \t\t\t<div class=\"row\">\n");
-      out.write("                            \t\t\t\t<div class=\"rating col-md-6 col-sm-6 col-xs-6\" style=\"text-align: left;\">\n");
-      out.write("                            \t\t\t\t\tApple\n");
-      out.write("                                            <!-- <h5 class=\"price-text-color\">\n");
-      out.write("                                            $199.99</h5> -->\n");
-      out.write("                                        </div>\n");
-      out.write("                                        <div class=\"rating hidden-sm col-md-6 col-sm-6 col-xs-6\">\n");
-      out.write("                                        \t30.00$\n");
-      out.write("                                        </div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"separator clear-left\">\n");
-      out.write("                                    \t<p class=\"btn-add\">\n");
-      out.write("                                    \t\t<i class=\"fa fa-shopping-cart\"></i><a href=\"#\" class=\"hidden-sm\">Add to cart</a></p>\n");
-      out.write("\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    \t<div class=\"clearfix\">\n");
-      out.write("                                    \t</div>\n");
-      out.write("                                    </div>\n");
-      out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </div>\n");
-      out.write("                    </div>\n");
+      out.write("                   \n");
       out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("        </div>");
+      out.write('\n');
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+ 
+    ArrayList<m_san_pham> sps = (ArrayList)request.getAttribute("san_phams"); 
+    
+    String command = "";
+    if(request.getAttribute("command")!=null)
+        command = (String) request.getAttribute("command");
+    int countsp = sps.size();
+   
+    
+
+      out.write("\n");
+      out.write("\n");
+      out.write(" <div class=\"row\">\n");
+      out.write("        \t<div class=\"row\">\n");
+      out.write("        \t\t<div class=\"col-md-9\">\n");
+      out.write("        \t\t\t<h2>\n");
+      out.write("        \t\t\tPromotion For Now</h2>\n");
+      out.write("        \t\t</div>\n");
+      out.write("                        \n");
+      out.write("                    ");
+
+                    int dem1 = 0;
+                    int sl = sps.size();
+                    for(m_san_pham sp:sps)
+                    { 
+                        if(dem1 == 0)
+                        {
+                    
+      out.write("\n");
+      out.write("                    <div class=\"item\" style=\" margin-top: 30px \">\n");
+      out.write("                        <div class=\"row\">\n");
+      out.write("                    ");
+ 
+                        dem1++;
+                        }
+                        if(dem1 <= 3)
+                        {
+                            
+                        
+                    
+                    
+      out.write("\n");
+      out.write("                            <div class=\"col-sm-4\">\n");
+      out.write("                                <div class=\"col-item\">\n");
+      out.write("                                    <div class=\"photo\">\n");
+      out.write("                                        <a href=\"chi_tiet_san_pham?ma_san_pham=");
+      out.print( sp.getMa_san_pham());
+      out.write("\"><img src=\"public/images/");
+      out.print( sp.getHinh());
+      out.write("\" class=\"img-responsive\" alt=\"a\" /></a>\n");
+      out.write("                                    </div>\n");
+      out.write("                                    <div class=\"info\">\n");
+      out.write("                                        <div class=\"row\">\n");
+      out.write("                                            <div class=\"price col-md-6 col-sm-6 col-xs-6\">\n");
+      out.write("                                                <h5>\n");
+      out.write("                                                ");
+      out.print( sp.getTen_san_pham());
+      out.write("</h5>\n");
+      out.write("                                                <h5 class=\"discount\">\n");
+      out.write("                                                $49.99</h5>\n");
+      out.write("                                            </div>\n");
+      out.write("                                            <div class=\"rating hidden-sm col-md-6 col-sm-6 col-xs-6\">\n");
+      out.write("                                                $");
+      out.print( sp.getDon_gia());
+      out.write("\n");
+      out.write("                                            </div>\n");
+      out.write("                                        </div>\n");
+      out.write("                                        <div class=\"separator clear-left\">\n");
+      out.write("                                            <p class=\"btn-add\">\n");
+      out.write("                                                <i class=\"fa fa-shopping-cart\"></i><a href=\"CartServlet?command=plus&ma_san_pham=");
+      out.print( sp.getMa_san_pham());
+      out.write("\" class=\"hidden-sm\">Add to cart</a></p>\n");
+      out.write("\n");
+      out.write("                                            </div>\n");
+      out.write("                                            <div class=\"clearfix\">\n");
+      out.write("                                            </div>\n");
+      out.write("                                        </div>\n");
+      out.write("                                    </div>\n");
+      out.write("                            </div>\n");
+      out.write("                    ");
+
+                        dem1++;
+                        }
+                        if(dem1 > 3)
+                        {
+                    
+      out.write("\n");
+      out.write("                    \n");
+      out.write("                           </div>\n");
+      out.write("                    </div> \n");
+      out.write("                        \n");
+      out.write("                    ");
+
+                            dem1=0;
+                         }
+                    
+                    
+      out.write("    \n");
+      out.write("                    \n");
+      out.write("                    ");
+
+                    }
+                    
+      out.write("\n");
+      out.write("                    \n");
+      out.write("                    \n");
+      out.write("                    \n");
+      out.write("                  \n");
+      out.write("                       </div>\n");
+      out.write("           \n");
+      out.write("        </div> \n");
+      out.write("                    ");
+ 
+                    
+                    if((request.getAttribute("count"))!=null){
+      out.write(" \n");
+      out.write("                                ");
+ int count = Integer.parseInt(String.valueOf(request.getAttribute("count")));
+      out.write("        \n");
+      out.write("                                <ul class=\"pagination\">\n");
+      out.write("                                     ");
+ 
+                                    int dem = 0;
+                                    if(count%6 == 0)
+                                    {
+                                        dem = count/6;
+                                    }
+                                    else
+                                        dem = count/6 + 1;
+                                    for(int i = 1; i <= dem ; i++) {
+      out.write("\n");
+      out.write("                                    <li><a href=\"san_phams?command=");
+      out.print( command);
+      out.write("&pages=");
+      out.print( i);
+      out.write('"');
+      out.write('>');
+      out.print( i);
+      out.write("</a></li>\n");
+      out.write("                                   \n");
+      out.write("                                    ");
+
+                                        }
+                                    
+      out.write("\n");
+      out.write("                                  </ul>\n");
+      out.write("                                 ");
+
+                                }
+                                 
+      out.write("\n");
+      out.write("                   \n");
+      out.write("\n");
+      out.write("            </div>\n");
+      out.write("           \n");
+      out.write("        </div>\n");
+      out.write("    </div>\n");
+      out.write("</div>");
+      out.write('\r');
+      out.write('\n');
+
+        
+    }
+    else if(view == "views/single/v_single.jsp")
+    {
+
+      out.write('\r');
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+ 
+    m_san_pham sp = (m_san_pham)request.getAttribute("sp");
+
+
+      out.write("\n");
+      out.write("<div class=\"men\">\n");
+      out.write("   \t<div class=\"container\">\n");
+      out.write("      <div class=\"col-md-9 single_top\">\n");
+      out.write("      \t<div class=\"single_left\">\n");
+      out.write("      \t  <div class=\"labout span_1_of_a1\">\n");
+      out.write("\t\t\t<div class=\"flexslider\">\n");
+      out.write("\t\t\t\t\t <ul class=\"slides\">\n");
+      out.write("                                             <li data-thumb=\"public/images/");
+      out.print( sp.getHinh());
+      out.write("\">\n");
+      out.write("\t\t\t\t\t\t\t<img src=\"public/images/");
+      out.print( sp.getHinh());
+      out.write("\" />\n");
+      out.write("\t\t\t\t\t\t\n");
+      out.write("\t\t\t\t\t </ul>\n");
+      out.write("\t\t\t\t  </div>\n");
+      out.write("\t\t          <div class=\"clearfix\"></div>\t\n");
+      out.write("\t    </div>\n");
+      out.write("\t\t<div class=\"cont1 span_2_of_a1 simpleCart_shelfItem\">\n");
+      out.write("\t\t\t\t<h1>");
+      out.print( sp.getTen_san_pham());
+      out.write("</h1>\n");
+      out.write("\t\t\t\t<p class=\"availability\">Views: <span class=\"color\">");
+      out.print( sp.getSo_lan_xem());
+      out.write("</span></p>\n");
+      out.write("                                \n");
+      out.write("\t\t\t    <!-- <div class=\"price_single\">\n");
+      out.write("\t\t\t\t  <span class=\"reducedfrom\">$140.00</span>\n");
+      out.write("\t\t\t\t  <span class=\"amount item_price actual\">$120.00</span><a href=\"#\">click for offer</a>\n");
+      out.write("\t\t\t\t</div> -->\n");
+      out.write("\t\t\t\t<h2 class=\"quick\">Quick Overview:</h2>\n");
+      out.write("\t\t\t\t<ul class=\"quick_desc\"> \n");
+      out.write("\t\t\t\t\t<li>Nam liber tempor cum soluta nobis eleifend optioncongue</li> \n");
+      out.write("\t\t\t\t\t<li>nihil imperdiet doming id quod mazim placerat facer possim assum.</li>\n");
+      out.write("\t\t\t\t\t<li>Typi non habent claritatem insitam; es</li>\n");
+      out.write("\t\t\t\t</ul>\n");
+      out.write("\t\t\t    <div class=\"wish-list\">\n");
+      out.write("\t\t\t\t \t<span class=\"amount item_price actual\">$");
+      out.print( sp.getDon_gia());
+      out.write("</span>\n");
+      out.write("\t\t\t\t </div>\n");
+      out.write("                                 \n");
+      out.write("\t\t\t\t<div class=\"quantity_box\">\n");
+      out.write("\t\t\t\t\t<ul class=\"product-qty\">\n");
+      out.write("\t\t\t\t\t   <!-- <span>Quantity:</span> -->\n");
+      out.write("                                           <select class=\"product-qty\" name=\"\">\n");
+      out.write("                                               <option value=\"1\">1</option>\n");
+      out.write("\t\t\t\t\t\t <option value=\"2\">2</option>\n");
+      out.write("\t\t\t\t\t\t <option value=\"3\">3</option>\n");
+      out.write("\t\t\t\t\t\t <option>4</option>\n");
+      out.write("\t\t\t\t\t\t <option>5</option>\n");
+      out.write("\t\t\t\t\t\t <option>6</option>\n");
+      out.write("\t\t\t\t\t   </select>\n");
+      out.write("\t\t\t\t\t   <a href=\"CartServlet?command=plus&ma_san_pham=");
+      out.print( sp.getMa_san_pham());
+      out.write("\" class=\"btn btn-primary btn-normal btn-inline btn_form button item_add item_1\" target=\"_self\">Add to cart</a>\n");
+      out.write("\t\t\t\t    </ul>\n");
+      out.write("\t\t\t\t    <ul class=\"single_social\">\n");
+      out.write("\t\t\t\t\t\t\n");
+      out.write("\t\t   \t\t    </ul>\n");
+      out.write("\t\t   \t\t    <div class=\"clearfix\"></div>\n");
+      out.write("\t   \t\t    </div>\n");
+      out.write("\t\t\t    \n");
+      out.write("\t\t\t</div>\n");
+      out.write("\t\t    <div class=\"clearfix\"> </div>\n");
+      out.write("\t\t</div>\n");
+      out.write("\n");
+      out.write("\t\t</div>\n");
+      out.write("      ");
+      out.write(" \n");
+      out.write("\n");
+      out.write("\n");
+ 
+    ArrayList<m_san_pham> loai_sp = (ArrayList)request.getAttribute("loai_sp");
+    
+    
+
+      out.write("\n");
+      out.write("<div class=\"col-md-3 tabs\">\n");
+      out.write("\t      <h3 class=\"m_1\">Related Products</h3>\n");
+      out.write("              \n");
+      out.write("            ");
+for (m_san_pham l:loai_sp){
+      out.write("\n");
+      out.write("\t      <ul class=\"product\">\n");
+      out.write("                  <li class=\"product_img\"><img src=\"public/images/");
+      out.print( l.getHinh());
+      out.write("\" class=\"img-responsive\" alt=\"\"/></li>\n");
+      out.write("\t      \t<li class=\"product_desc\">\n");
+      out.write("\t      \t\t<h4><a href=\"#\">");
+      out.print( l.getTen_san_pham());
+      out.write("</a></h4>\n");
+      out.write("\t      \t\t<p class=\"single_price\">$");
+      out.print( l.getDon_gia());
+      out.write("</p>\n");
+      out.write("                        <a href=\"chi_tiet_san_pham?ma_san_pham=");
+      out.print( l.getMa_san_pham());
+      out.write("\" class=\"link-cart\">Shop now</a>\n");
+      out.write("\t      \t    \n");
+      out.write("\t        </li>\n");
+      out.write("\t      \t<div class=\"clearfix\"> </div>\n");
+      out.write("\t      </ul>\n");
+      out.write("            ");
+}
+      out.write("\n");
+      out.write("\t     \n");
+      out.write("        </div>");
+      out.write("\n");
+      out.write("     <div class=\"clearfix\"> </div>\n");
+      out.write("\t</div>\n");
+      out.write("   </div>");
+      out.write('\r');
+      out.write('\n');
+
+        
+    }
+    else if(view == "views/checkout/v_checkout.jsp")
+    {
+
+      out.write('\r');
+      out.write('\n');
+      out.write(" \n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+
+        cart c = (cart)session.getAttribute("cart");
+        m_khach_hang k = (m_khach_hang)session.getAttribute("kh");
+        
+        if(c==null)
+            response.sendRedirect("/QL_SieuThi/index.jsp");
+        
+      out.write("\n");
+      out.write("        <h1>Chao,");
+      out.print( k.getTen_khach_hang());
+      out.write("</h1>\n");
+      out.write("        \n");
+      out.write("        <table border=\"1\" width=\"100%\" style=\"font-size: 20px;\">\n");
+      out.write("            <tr>\n");
+      out.write("                <td>Ten san pham</td>\n");
+      out.write("                <td>Don gia</td>\n");
+      out.write("                <td>So luong</td>\n");
+      out.write("                <td>Tong</td>\n");
+      out.write("            </tr>\n");
+      out.write("            ");
+for(Map.Entry<Integer , Item> list: c.getCartItems().entrySet() ){
+      out.write("\n");
+      out.write("            <tr>\n");
+      out.write("                <td>");
+      out.print( list.getValue().getSp().getTen_san_pham());
+      out.write("</td>\n");
+      out.write("                <td>");
+      out.print( list.getValue().getSp().getDon_gia());
+      out.write("</td>\n");
+      out.write("                <td>1</td>\n");
+      out.write("                <td>");
+      out.print( (list.getValue().getSp().getDon_gia()*1));
+      out.write("</td>\n");
+      out.write("            </tr>\n");
+      out.write("            ");
+}
+      out.write("\n");
+      out.write("        </table>\n");
+      out.write("        \n");
+      out.write("        Tong tien: ");
+      out.print( c.totalCart());
+      out.write("\n");
+      out.write("        \n");
+      out.write("        <hr>\n");
+      out.write("        <a href=\"dat_hang.jsp\" class=\"btn btn-success btn-circle\">Dat hang</a>\n");
+      out.write("        <a href=\"index.jsp\" class=\"btn btn-success btn-circle\">Mua tiep</a>");
       out.write('\r');
       out.write('\n');
 
@@ -1166,10 +1375,61 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write('\n');
       out.write('\n');
+      out.write("<footer>\n");
+      out.write("        \t\t\t\t\t\t<div class=\"container-fluid\">\n");
+      out.write("\n");
+      out.write("        \t\t\t\t\t\t\t<div class=\"col-lg-4 col-md-4 col-sm-4 col-xs-12\">\n");
+      out.write("        \t\t\t\t\t\t\t\t<div class=\"map\">\n");
+      out.write("        \t\t\t\t\t\t\t\t\t<h2>watermelon</h2>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t<div>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t\t<p><strong>Address</strong></p>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t\t<p>97 Man Thien Street, District 9, HCMC</p>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t\t<p><strong>Phone</strong></p>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t\t<p> 028 - 1234 - 567</p>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t\t<p><strong>E-mail</strong></p>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t\t<p>watermelon@gmail.com</p>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t</div>\n");
+      out.write("        \t\t\t\t\t\t\t\t</div>\n");
+      out.write("        \t\t\t\t\t\t\t</div>\n");
+      out.write("\n");
+      out.write("        \t\t\t\t\t\t\t<div class=\"col-lg-4 col-md-4 col-sm-4 col-xs-12\">\n");
+      out.write("        \t\t\t\t\t\t\t\t<div class=\"map\">\n");
+      out.write("        \t\t\t\t\t\t\t\t\t<h2>Blog</h2>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t<div>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t\t<p><strong>How to get the promotion?</strong></p>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t\t<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t\t<p><strong>Fresh - Cheap - Tasty</strong></p>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t\t<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n");
+      out.write("\n");
+      out.write("        \t\t\t\t\t\t\t\t\t</div>\n");
+      out.write("        \t\t\t\t\t\t\t\t</div>\n");
+      out.write("        \t\t\t\t\t\t\t</div>\n");
+      out.write("\n");
+      out.write("        \t\t\t\t\t\t\t<div class=\"col-lg-4 col-md-4 col-sm-4 col-xs-12\">\n");
+      out.write("        \t\t\t\t\t\t\t\t<div class=\"form-group signup\">\n");
+      out.write("        \t\t\t\t\t\t\t\t\t<b>Email: </b><input type=\"email\" id=\"email\" class=\"form-control\"><br>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t<b>Password: </b><input type=\"password\" class=\"form-control\" id=\"pass\"></div>\n");
+      out.write("        \t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn-signup\" onclick=\"signup();\">Sign up</button>\n");
+      out.write("        \t\t\t\t\t\t\t\t</div>\n");
+      out.write("        \t\t\t\t\t\t\t</div>\n");
+      out.write("        \t\t\t\t\t\t\t<p style=\"text-align: center; margin-top: 20px; font-size: 12px; color: #333\">Copyright &copy; 2017 All rights reserved by watermelon </p> \n");
+      out.write("        \t\t\t\t\t\t</div>\n");
+      out.write("        \t\t\t\t\t</footer>\n");
+      out.write("\n");
       out.write("<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js\"></script>\n");
       out.write("<!-- Include all compiled plugins (below), or include individual files as needed -->\n");
       out.write("<script src=\"public_main/js/bootstrap.js\"></script>\n");
-      out.write("\n");
+      out.write("<script defer src=\"public_main/js/jquery.flexslider.js\"></script>\n");
+      out.write("<link rel=\"stylesheet\" href=\"public_main/css/flexslider.css\" type=\"text/css\" media=\"screen\" />\n");
+      out.write("<script>\n");
+      out.write("// Can also be used with $(document).ready()\n");
+      out.write("$(window).load(function() {\n");
+      out.write("  $('.flexslider').flexslider({\n");
+      out.write("    animation: \"slide\",\n");
+      out.write("    controlNav: \"thumbnails\"\n");
+      out.write("  });\n");
+      out.write("});\n");
+      out.write("</script>\n");
       out.write("<script>\n");
       out.write("\tdocument.addEventListener('DOMContentLoaded', function(){\n");
       out.write("\t\tlet wrapper = document.getElementById('wrapper');\n");

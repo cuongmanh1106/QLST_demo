@@ -12,10 +12,19 @@
     
 %>
 
+<% if(request.getAttribute("error")!=null)
+{
+    String error = (String) request.getAttribute("error");
+%>
+<h1 style="color:red"><%= error%></h1>
+<%
+}
+%>
+
  <div class="row">
         	<div class="row">
         		<div class="col-md-9">
-        			<h2>
+                            <h2 style="margin-top: 30px;">
         			Promotion For Now</h2>
         		</div>
                         

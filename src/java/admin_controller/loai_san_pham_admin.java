@@ -103,15 +103,15 @@ public class loai_san_pham_admin extends HttpServlet {
             list = lq.Doc_loai_san_pham();
             count = list.size();
             
-            if(count<=2)
+            if(count<=4)
             {
                 vt = 1;
                 limit = count;
             }
             else
             {
-                vt = (pages - 1) *2;
-                limit = 2;
+                vt = (pages - 1) *4;
+                limit = 4;
             }
             
             list = lq.Doc_loai_san_pham_phan_trang(vt, limit);

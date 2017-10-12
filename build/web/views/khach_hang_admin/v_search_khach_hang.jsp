@@ -38,7 +38,7 @@
                         <div class="panel-heading">
                              <form method="post" action="search">
                                 <input type="hidden" name="command" value="khach_hang">
-                                <input type="text" name="tim" value="<%= (tim!="")?tim:""%>">
+                                <input type="text" placeholder="Nhập tên khách hàng...." name="tim" value="<%= (tim!="")?tim:""%>">
                                 <input type="submit" value="Tim">
                             </form>
                         </div>

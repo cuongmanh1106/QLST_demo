@@ -35,7 +35,7 @@
 					<div class="form-group">
                                             <input type="text" name="search" value=""   placeholder="Search Product ...">
                                             <!--<input type="submit">-->
-                                            <button type="submit">
+                                            <button type="submit" >
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
 					</div>

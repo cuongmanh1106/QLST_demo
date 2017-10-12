@@ -79,7 +79,7 @@
           
             
           <p>
-            <input class="button btn btn-primary" type="submit" value="Cập nhật" name="btnCapnhat" onclick="return Kiemtrathemsanpham()"  />
+            <input class="button btn btn-primary" type="submit" value="Cập nhật" name="btnCapnhat"  />
             <input class="button btn btn-default" type="button" value="Bỏ qua" onclick="window.location='san_phams_admin'" />
           </p>
         </fieldset>

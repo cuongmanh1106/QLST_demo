@@ -35,11 +35,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             <form method="post" action="search">
-                                <input type="hidden" name="command" value="san_pham">
-                                <input type="text" name="tim" id="tim" value="">
-                                <input type="submit" value="Tim" onclick="return kiemtrasearchso()">
-                            </form>
+                             
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">

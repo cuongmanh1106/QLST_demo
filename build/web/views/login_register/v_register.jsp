@@ -1,18 +1,19 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<head> 
+<!--<head> 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-		<!-- Website CSS style -->
+		 Website CSS style 
 		<link href="../../public/css/bootstrap.min.css" rel="stylesheet">
 
-		<!-- Website Font style -->
+		 Website Font style 
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../../public_main/css/style.css">
-		<!-- Google Fonts -->
+		 Google Fonts 
 		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+                <script src="../../public/js/kiemtra.js"></script>
                             
 
 
@@ -20,7 +21,8 @@
 	</head>
                 
 		
-<body>	
+<body>	-->
+
 		<div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
@@ -29,7 +31,7 @@
 						
 						<div class="form-group">
                                                     <input name="command" value="dangki" type="hidden">
-							<label for="name" class="cols-sm-2 control-label">Your Name</label>
+							<label for="name" class="cols-sm-2 control-label">Your Name (*)</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
@@ -39,17 +41,17 @@
 						</div>
 
 						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Your Email</label>
+							<label for="email" class="cols-sm-2 control-label">Your Email (*)</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+									<input type="email" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
 								</div>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="password" class="cols-sm-2 control-label">Password</label>
+							<label for="password" class="cols-sm-2 control-label">Password (*)</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
@@ -59,7 +61,7 @@
 						</div>
 
 						<div class="form-group">
-							<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+							<label for="confirm" class="cols-sm-2 control-label">Confirm Password (*)</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
@@ -114,7 +116,7 @@
                                             
 
 						<div class="form-group ">
-                                                    <input type="submit" class="btn btn-primary btn-lg btn-block login-button">
+                                                    <input type="submit" class="btn btn-primary btn-lg btn-block login-button" onclick="return kiemtra_dangki()">
 						</div>
 						
 					</form>
@@ -126,8 +128,8 @@
    	
 
 		 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../../public/js/bootstrap.min.js"></script>
-	</body>
-</html>
+    <!--<script src="../../public/js/bootstrap.min.js"></script>-->
+	<!--</body>-->
+<!--</html>-->

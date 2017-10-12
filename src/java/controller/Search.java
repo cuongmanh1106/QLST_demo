@@ -81,28 +81,40 @@ public class Search extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String tim = request.getParameter("search");
-        
-        ArrayList<m_san_pham> list = new ArrayList<>();
-        
-        san_pham_query sq = new san_pham_query();
-        
         try {
+            String tim = request.getParameter("search");
+            
+            ArrayList<m_san_pham> list = new ArrayList<>();
+            
+            san_pham_query sq = new san_pham_query();
+            
+            ArrayList<m_san_pham> top = new ArrayList<>();
+            
+            top = sq.Doc_top_san_pham_product();
+        
             list = sq.tim_kiem_san_pham(tim);
+            
+            if(list.size()==0)
+            {
+                String error = "Không tìm thấy sản phẩm '"+tim+"'";
+                request.setAttribute("error", error);
+            }
+            
+            
+            String view = "views/product/v_san_pham.jsp";
+            
+            String url = "/product.jsp";
+            
+            request.setAttribute("san_phams", list);
+            request.setAttribute("view", view);
+            request.setAttribute("tim", tim);
+            request.setAttribute("top", top);
+            
+            RequestDispatcher dis = request.getRequestDispatcher(url);
+            dis.forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        String view = "views/product/v_san_pham.jsp";
-        
-        String url = "/product.jsp";
-        
-        request.setAttribute("san_phams", list);
-        request.setAttribute("view", view);
-        request.setAttribute("tim", tim);
-        
-        RequestDispatcher dis = request.getRequestDispatcher(url);
-        dis.forward(request, response);
         
     }
 

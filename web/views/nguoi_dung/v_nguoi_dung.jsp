@@ -44,8 +44,8 @@ String thongbao ="";
                     <div class="panel panel-default">
                         <div class="panel-heading">
                              <form method="post" action="search">
-                                <input type="hidden" name="command" value="san_pham">
-                                <input type="text" name="tim" value="">
+                                <input type="hidden" name="command" value="nguoi_dung">
+                                <input type="text" placeholder="Nhập tên người dùng...." name="tim" value="">
                                 <input type="submit" value="Tim">
                             </form>
                         </div>
@@ -82,7 +82,7 @@ String thongbao ="";
                                                 <a href="form_sua?ma_nguoi_dung=<%= nguoi_dung.getMa_nguoi_dung()%>&command=nguoi_dung" title="Edit" >
                                                 <img src="public/images/icons/pencil.png" alt="Edit" />
                                                 </a> 
-                                                <a href="javaScript:void(0)" title="Delete" onclick="Xoanguoidung<%= nguoi_dung.getMa_nguoi_dung()%>)"> 
+                                                <a href="javaScript:void(0)" title="Delete" onclick="Xoanguoidung(<%= nguoi_dung.getMa_nguoi_dung() %>)"> 
                                                 <img src="public/images/icons/cross.png" alt="Delete" />
                                                 </a>                     
                                                 

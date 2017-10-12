@@ -102,15 +102,15 @@ public class san_phams_admin extends HttpServlet {
             list = sq.Doc_san_pham();
             count = list.size();
             
-            if(count<=5)
+            if(count<=10)
             {
                 vt = 1;
                 limit = count;
             }
             else
             {
-                vt = (pages - 1) *5;
-                limit = 5;
+                vt = (pages - 1) *10;
+                limit = 10;
             }
             
             

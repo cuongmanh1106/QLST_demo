@@ -47,7 +47,7 @@
                         <div class="panel-heading">
                              <form method="post" action="search">
                                 <input type="hidden" name="command" value="loai_san_pham">
-                                <input type="text" name="tim" id="tim" value="">
+                                <input type="text" placeholder="Nhập mã loại..." name="tim" id="tim" value="">
                                 <input type="submit" value="Tim" onclick="return kiemtrasearchso()">
                             </form>
                         </div>
@@ -102,12 +102,12 @@
                                 <ul class="pagination">
                                      <% 
                                     int dem = 0;
-                                    if(count%2 == 0)
+                                    if(count%4 == 0)
                                     {
-                                        dem = count/2;
+                                        dem = count/4;
                                     }
                                     else
-                                        dem = count/2 + 1;
+                                        dem = count/4 + 1;
                                     for(int i = 1; i <= dem ; i++) {%>
                                     <li><a href="loai_san_pham_admin?pages=<%= i%>"><%= i%></a></li>
                                    

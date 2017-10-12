@@ -38,8 +38,8 @@
                         <div class="panel-heading">
                              <form method="post" action="search">
                                 <input type="hidden" name="command" value="san_pham">
-                                <input type="text" name="tim" value="<%= (tim != "")?tim:""%>">
-                                <input type="submit" value="Tim">
+                                <input type="text" placeholder="Nhập tên sản phẩm..." name="tim" value="<%= (tim != "")?tim:""%>">
+                                <input type="submit" value="Tim" >
                             </form>
                         </div>
                         <div class="panel-body">

@@ -38,7 +38,7 @@
                         <div class="panel-heading">
                              <form method="post" action="search">
                                 <input type="hidden" name="command" value="loai_san_pham">
-                                <input type="text" name="tim" id="tim" value="">
+                                <input type="text" placeholder="Nhập mã loại..." name="tim" id="tim" value="">
                                 <input type="submit" value="Tim" onclick="return kiemtrasearchso()">
                             </form>
                         </div>

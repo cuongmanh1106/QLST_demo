@@ -1192,7 +1192,7 @@ public class san_pham_query {
 //        System.out.print(sp.getMo_ta_chi_tiet());
         
         //search------------------------>
-//        list = sq.tim_kiem_san_pham("qiq");
+//        list = sq.tim_kiem_san_pham("ca");
 //        System.out.print(list.size());
 //        for(m_san_pham a:list)
 //        {

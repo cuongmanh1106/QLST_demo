@@ -35,7 +35,7 @@
                         <div class="panel-heading">
                              <form method="post" action="search">
                                 <input type="hidden" name="command" value="khach_hang">
-                                <input type="text" name="tim" id="tim" value="">
+                                <input type="text" placeholder="Nhập tên khách hàng...." name="tim" id="tim" value="">
                                 <input type="submit" value="Tim" >
                             </form>
                         </div>
@@ -73,7 +73,7 @@
                                                 <img src="public/images/icons/pencil.png" alt="Edit" />
                                                 </a> 
                                                
-                                                <a href="javaScript:void(0)" title="Delete" onclick="Xoasanpham(<%= kh.getMa_khach_hang()%>)"> 
+                                                <a href="javaScript:void(0)" title="Delete" onclick="Xoanguoidung(<%= kh.getMa_khach_hang()%>)"> 
                                                 <img src="public/images/icons/cross.png" alt="Delete" />
                                                 </a>                     
                                                 

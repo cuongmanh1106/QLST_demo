@@ -40,7 +40,7 @@
                         <div class="panel-heading">
                              <form method="post" action="search">
                                 <input type="hidden" name="command" value="hoa_don">
-                                <input type="text" name="tim" value="">
+                                <input type="text" placeholder="Nhập tên khách hàng..." name="tim" value="">
                                 <input type="submit" value="Tim">
                             </form>
                         </div>
